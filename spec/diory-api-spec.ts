@@ -55,7 +55,7 @@ describe("Diory api", () => {
         DioryApi.get("5690", "diories")
       }
       catch(err) {
-        expect(err).toBe("Authentication token invalid.")
+        expect(err).toBe("Authentication token is invalid.")
         done()
       }
     })

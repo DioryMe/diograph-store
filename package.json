@@ -2,9 +2,9 @@
   "name": "diograph-store",
   "version": "0.0.3",
   "description": "",
-  "main": "dist/diograph-store.js",
+  "main": "lib/diograph-store.js",
   "scripts": {
-    "start": "tsc && node lib/index.js",
+    "compile": "tsc",
     "test": "tsc -p tsconfig.test.json && jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },
   "author": "",

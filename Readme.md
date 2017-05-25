@@ -6,15 +6,14 @@
 npm install
 ```
 
-## Bundle
+## Compile
 
 ```
-npm start
+npm run compile
 ```
 
 Compiles Typescript into Javascript starting from `app/index.ts`.
-Compiled Javascript is placed into `dist/bundle.js`.
-Then it runs `node dist/index.js`.
+Compiled Javascript is placed into `lib/`.
 
 ## Tests
 

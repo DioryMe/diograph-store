@@ -4,7 +4,7 @@
         "target": "es5",
         "sourceMap": false,
         "allowJs": false,
-        "outDir": "lib"
+        "outDir": "dist"
     },
     "exclude": [
       "node_modules",
