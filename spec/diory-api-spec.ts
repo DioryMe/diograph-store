@@ -36,15 +36,30 @@ describe("Diory api", () => {
     })
   })
 
-  it("throws 'Authentication token not given' if no authToken given", done => {
-    DioryApi.authToken = undefined
-    try {
-      DioryApi.get("5690", "diories")
-    }
-    catch(err) {
-      expect(err).toBe("Authentication token not given.")
-      done()
-    }
+  describe("Authentication token", () => {
+
+    it("throws 'Authentication token not given' if no authToken given", done => {
+      DioryApi.authToken = undefined
+      try {
+        DioryApi.get("5690", "diories")
+      }
+      catch(err) {
+        expect(err).toBe("Authentication token not given.")
+        done()
+      }
+    })
+
+    it("throws 'Authentication token invalid' if something else than string as token", done => {
+      DioryApi.authToken = {}
+      try {
+        DioryApi.get("5690", "diories")
+      }
+      catch(err) {
+        expect(err).toBe("Authentication token invalid.")
+        done()
+      }
+    })
+
   })
 
 })
