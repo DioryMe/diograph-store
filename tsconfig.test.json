@@ -4,10 +4,11 @@
         "target": "es5",
         "sourceMap": false,
         "allowJs": false,
-        "outDir": "dist"
+        "outDir": "lib"
     },
-    "include": [
-      "app/diograph-store.ts",
-      "app/*/*.ts"
+    "exclude": [
+      "node_modules",
+      "dist",
+      "lib"
     ]
 }

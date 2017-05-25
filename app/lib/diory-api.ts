@@ -4,20 +4,14 @@ var request = superagent.agent()
 export class DioryApi {
 
   public static authToken
-  private static getAuthToken() {
-    let authToken
-    try {
-      let diographAuth = require("diograph-authentication")
-      authToken = diographAuth.token
-    }
-    catch(e) {
-      authToken = this.authToken
-    }
 
-    if (typeof authToken === "string" && authToken !== "") {
-      return authToken
+  private static getAuthToken() {
+    if (typeof this.authToken === "string") {
+      return this.authToken
+    } else if (!this.authToken || this.authToken === "") {
+      throw "Authentication token not given."
     } else {
-      throw "Authentication token not given"
+      throw "Authentication token is invalid."
     }
 
   }

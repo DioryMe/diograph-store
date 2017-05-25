@@ -2,10 +2,10 @@
   "name": "diograph-store",
   "version": "0.0.2",
   "description": "",
-  "main": "lib/diograph-store.js",
+  "main": "dist/diograph-store.js",
   "scripts": {
     "start": "tsc && node lib/index.js",
-    "test": "tsc && jasmine JASMINE_CONFIG_PATH=jasmine.json"
+    "test": "tsc -p tsconfig.test.json && jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },
   "author": "",
   "license": "ISC",
