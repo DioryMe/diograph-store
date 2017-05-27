@@ -1,9 +1,36 @@
-# Template: Webpack & Typescript & Jasmine
+# Diograph-store
 
-## Install dependencies
+## Usage
 
 ```
-npm install
+npm install diograph-store --save
+```
+
+```
+import { DiographStore } from "diograph-store"
+```
+
+```
+DiographStore.setAuthToken("my-dev-token");
+
+try {
+  DiographStore.get("1234").then((diory) => {
+    console.log(diory)
+  })
+} catch(e) {
+  console.log(e)
+}
+```
+
+Output:
+```
+Diory {
+  id: '1234',
+  name: 'Test diory',
+  url: 'http://google.com/',
+  type: 'webpage',
+  background: null,
+  date: null }
 ```
 
 ## Compile
