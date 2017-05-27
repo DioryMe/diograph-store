@@ -1,5 +1,4 @@
-import * as superagent from "superagent"
-var request = superagent.agent()
+import * as request from "superagent"
 
 export class DioryApi {
 
