@@ -34,5 +34,21 @@ export class DiographApi {
 
   }
 
+  static getAll(type="diories") {
+    if (type !== "diories") { throw "Invalid type for DiographApi.getAll()" }
+    type = type + "/"
+
+    var promise = request
+      .get(this.baseUrl + type)
+      .set("Accept", "application/vnd.api+json")
+      .set("Authorization", this.getAuthToken())
+
+    return promise.then((res, err) => {
+      return res.body
+    }).catch(err => {
+      throw err.response.body
+    })
+  }
+
 }
 

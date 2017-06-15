@@ -60,14 +60,6 @@ describe("Diograph API", () => {
       })
     })
 
-    it("returns connections", (done) => {
-      DiographApi.getAll("connections").then(res => {
-        expect(res.data).toEqual(jasmine.any(Array));
-        expect(res.data.type).toEqual("connections");
-        done();
-      })
-    })
-
     it("returns one error more", (done) => {
       try {
         DiographApi.getAll("invalid type")
