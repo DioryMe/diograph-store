@@ -52,6 +52,32 @@ describe("Diograph API", () => {
 
   describe(".getAll()", () => {
 
+    it("returns diories", (done) => {
+      DiographApi.getAll("diories").then(res => {
+        expect(res.data).toEqual(jasmine.any(Array));
+        expect(res.data[0].type).toEqual("diories");
+        done();
+      })
+    })
+
+    it("returns connections", (done) => {
+      DiographApi.getAll("connections").then(res => {
+        expect(res.data).toEqual(jasmine.any(Array));
+        expect(res.data.type).toEqual("connections");
+        done();
+      })
+    })
+
+    it("returns one error more", (done) => {
+      try {
+        DiographApi.getAll("invalid type")
+      }
+      catch(err) {
+        expect(err).toBe("Invalid type for DiographApi.getAll()");
+        done();
+      }
+    })
+
   })
 
   describe("Authentication token", () => {
