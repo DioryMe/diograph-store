@@ -17,5 +17,13 @@ export class DiographStore {
     });
   }
 
+  static getAll(): Promise<Diory[]> {
+    return new Promise((resolve, reject) => { resolve([new Diory({})]); });
+    // return DioryApi.getAll().then(response => {
+    //   this.datastore.sync(response);
+    //   return new Diory(this.datastore.find("diories", id));
+    // });
+  }
+
 }
 
