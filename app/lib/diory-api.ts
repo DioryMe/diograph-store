@@ -18,7 +18,7 @@ export class DioryApi {
   private static baseUrl = "http://diory-server.herokuapp.com/v1/"
 
   static get(id, type="diories") {
-
+    if (type !== "diories" && type !== "connections") { throw "Invalid type for DioryApi.get()" }
     type = type + "/"
 
     var promise = request
