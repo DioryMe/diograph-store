@@ -24,6 +24,16 @@ describe("DiographStore", () => {
       });
     });
 
+    it("throws an error if id is not given", (done) => {
+      try {
+        DiographStore.get(undefined);
+      }
+      catch(err) {
+        expect(err).toBe("No id was given for DiographStore.get()");
+        done();
+      }
+    })
+
   });
 
   describe(".getAll()", () => {

@@ -19,6 +19,7 @@ export class DiographApi {
 
   static get(id, type="diories") {
     if (type !== "diories" && type !== "connections") { throw "Invalid type for DiographApi.get()" }
+    if (id === undefined) { throw "No id was given for DiographApi.get()" }
     let endpoint = this.baseUrl + type + "/" + id
     return this.getFromEndpoint(endpoint)
   }
