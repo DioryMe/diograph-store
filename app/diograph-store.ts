@@ -13,17 +13,18 @@ export class DiographStore {
   static get(id): Promise<Diory> {
     if (id === undefined) { throw "No id was given for DiographStore.get()" }
     return DiographApi.get(id).then(response => {
-      this.datastore.sync(response);
-      return new Diory(this.datastore.find("diories", id));
-    });
+      this.datastore.sync(response)
+      return new Diory(this.datastore.find("diories", id))
+    })
   }
 
   static getAll(): Promise<Diory[]> {
-    return new Promise((resolve, reject) => { resolve([new Diory({})]); });
-    // return DioryApi.getAll().then(response => {
-    //   this.datastore.sync(response);
-    //   return new Diory(this.datastore.find("diories", id));
-    // });
+    return DiographApi.getAll().then(response => {
+      this.datastore.sync(response)
+      return this.datastore.findAll("diories").map(diory => {
+        return new Diory(diory)
+      })
+    })
   }
 
 }

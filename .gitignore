@@ -2,3 +2,4 @@ node_modules
 tmp
 dist
 oldstuff
+npm-debug.log
