@@ -6,6 +6,7 @@ export class DiographStore {
 
   public static setAuthToken(token) {
     DiographApi.authToken = token
+    this.datastore = new JsonApiDataStore();
   }
 
   private static datastore = new JsonApiDataStore()
