@@ -22,7 +22,7 @@ describe("Diograph API .getAll()", () => {
     })
   })
 
-  it("returns one error more", (done) => {
+  it("returns error if invalid type is given", (done) => {
     try {
       DiographApi.getAll("invalid type")
     }

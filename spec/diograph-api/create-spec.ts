@@ -24,4 +24,14 @@ describe("Diograph API .create()", () => {
     })
   })
 
+  it("returns error if invalid type is given", (done) => {
+    try {
+      DiographApi.create({}, "invalid type")
+    }
+    catch(err) {
+      expect(err).toBe("Invalid type for DiographApi.create()");
+      done();
+    }
+  })
+
 })
