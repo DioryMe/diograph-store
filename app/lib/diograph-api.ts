@@ -12,7 +12,6 @@ export class DiographApi {
     } else {
       throw "Authentication token is invalid."
     }
-
   }
 
   private static baseUrl = "http://diory-server.herokuapp.com/v1/"
@@ -33,6 +32,20 @@ export class DiographApi {
   private static getFromEndpoint(endpoint) {
     var promise = request
       .get(endpoint)
+      .set("Accept", "application/vnd.api+json")
+      .set("Authorization", this.getAuthToken())
+
+    return promise.then((res, err) => {
+      return res.body
+    }).catch(err => {
+      throw err.response.body
+    })
+  }
+
+  private static postToEndpoint(endpoint, data) {
+    var promise = request
+      .post(endpoint)
+      .send(data)
       .set("Accept", "application/vnd.api+json")
       .set("Authorization", this.getAuthToken())
 
