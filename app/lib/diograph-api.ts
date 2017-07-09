@@ -43,7 +43,8 @@ export class DiographApi {
 
     return promise.then((res, err) => {
       return res.body
-    }).catch(err => {
+    }, err => {
+      console.log(err.response.body)
       throw err.response.body
     })
   }
@@ -53,11 +54,13 @@ export class DiographApi {
       .post(endpoint)
       .send(data)
       .set("Accept", "application/vnd.api+json")
+      .set("Content-Type", "application/vnd.api+json")
       .set("Authorization", this.getAuthToken())
 
     return promise.then((res, err) => {
       return res.body
-    }).catch(err => {
+    }, err => {
+      console.log(err.response.body)
       throw err.response.body
     })
   }
