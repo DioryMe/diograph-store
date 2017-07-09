@@ -1,4 +1,4 @@
-import { DiographApi } from "../app/lib/diograph-api"
+import { DiographApi } from "../../app/lib/diograph-api"
 
 describe("Diograph API", () => {
 
@@ -55,54 +55,6 @@ describe("Diograph API", () => {
       catch(err) {
         expect(err).toBe("No id was given for DiographApi.get()");
         done();
-      }
-    })
-
-  })
-
-  describe(".getAll()", () => {
-
-    it("returns diories", (done) => {
-      DiographApi.getAll("diories").then(res => {
-        expect(res.data).toEqual(jasmine.any(Array));
-        expect(res.data[0].type).toEqual("diories");
-        done();
-      })
-    })
-
-    it("returns one error more", (done) => {
-      try {
-        DiographApi.getAll("invalid type")
-      }
-      catch(err) {
-        expect(err).toBe("Invalid type for DiographApi.getAll()");
-        done();
-      }
-    })
-
-  })
-
-  describe("Authentication token", () => {
-
-    it("throws 'Authentication token not given' if no authToken given", done => {
-      DiographApi.authToken = undefined
-      try {
-        DiographApi.get("5690", "diories")
-      }
-      catch(err) {
-        expect(err).toBe("Authentication token not given.")
-        done()
-      }
-    })
-
-    it("throws 'Authentication token invalid' if something else than string as token", done => {
-      DiographApi.authToken = {}
-      try {
-        DiographApi.get("5690", "diories")
-      }
-      catch(err) {
-        expect(err).toBe("Authentication token is invalid.")
-        done()
       }
     })
 
