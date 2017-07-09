@@ -14,6 +14,14 @@ describe("Diograph API .get()", () => {
     })
   })
 
+  it("returns a diory even though type is not given", (done) => {
+    DiographApi.get("5691").then(res => {
+      expect(res.data.type).toEqual("diories");
+      expect(res.data.id).toEqual("5691");
+      done();
+    })
+  })
+
   it("returns a connection if type is connections", (done) => {
     DiographApi.get("9982", "connections").then(res => {
       expect(res.data.type).toEqual("connections");

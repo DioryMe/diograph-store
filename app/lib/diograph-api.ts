@@ -29,7 +29,7 @@ export class DiographApi {
     return this.getFromEndpoint(endpoint)
   }
 
-  static create(type="diories", data={}) {
+  static create(data={}, type="diories") {
     if (type !== "diories") { throw "Invalid type for DiographApi.create()" }
     let endpoint = this.baseUrl + type
     return this.postToEndpoint(endpoint, data)
