@@ -17,7 +17,7 @@ describe("DiographStore .get()", () => {
 
   it("returns 404 - Not found when error", (done) => {
     DiographStore.get("invalid id").catch(err => {
-      expect(err.errors[0].title).toBe("Diory not found");
+      expect(err.response.body.errors[0].title).toBe("Diory not found");
       done();
     });
   });
