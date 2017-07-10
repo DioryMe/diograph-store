@@ -43,6 +43,12 @@ export class DiographApi {
     return this.putToEndpoint(endpoint, jsonApiData)
   }
 
+  static delete(id, type="diories") {
+    if (type !== "diories") { throw "Invalid type for DiographApi.delete()" }
+    let endpoint = this.baseUrl + type + "/" + id
+    return this.deleteToEndpoint(endpoint)
+  }
+
   private static getFromEndpoint(endpoint) {
     var promise = request
       .get(endpoint)
@@ -77,6 +83,17 @@ export class DiographApi {
 
     return promise.then((res, err) => {
       return res.body
+    }, err => { throw err })
+  }
+
+  private static deleteToEndpoint(endpoint) {
+    var promise = request
+      .delete(endpoint)
+      .set("Accept", "application/vnd.api+json")
+      .set("Authorization", this.getAuthToken())
+
+    return promise.then((res, err) => {
+      return res.status
     }, err => { throw err })
   }
 
