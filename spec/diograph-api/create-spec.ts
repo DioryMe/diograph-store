@@ -1,4 +1,5 @@
 import { DiographApi } from "../../app/lib/diograph-api"
+import * as ErrorHandler from "../../app/lib/error-handler"
 
 describe("Diograph API .create()", () => {
 
@@ -6,13 +7,13 @@ describe("Diograph API .create()", () => {
     DiographApi.authToken = "test-token"
   })
 
-  it("creates a 'New diory'", (done) => {
+  fit("creates a 'New diory'", (done) => {
     let data = { "name": "New diory" }
     DiographApi.create(data, "diories").then(res => {
       expect(res.data.type).toEqual("diories");
       expect(res.data.name).toEqual("New diory");
       done();
-    })
+    }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("creates a 'New diory' even though type is not given", (done) => {
