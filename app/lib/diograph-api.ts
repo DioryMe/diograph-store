@@ -43,9 +43,7 @@ export class DiographApi {
 
     return promise.then((res, err) => {
       return res.body
-    }, err => {
-      throw err.response.body
-    })
+    }, err => { throw err })
   }
 
   private static postToEndpoint(endpoint, data) {
@@ -58,9 +56,7 @@ export class DiographApi {
 
     return promise.then((res, err) => {
       return res.body
-    }, err => {
-      throw err
-    })
+    }, err => { throw err })
   }
 
 }
