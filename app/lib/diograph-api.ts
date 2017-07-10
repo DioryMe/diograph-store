@@ -32,7 +32,8 @@ export class DiographApi {
   static create(data={}, type="diories") {
     if (type !== "diories") { throw "Invalid type for DiographApi.create()" }
     let endpoint = this.baseUrl + type
-    return this.postToEndpoint(endpoint, data)
+    let jsonApiData = this.hashToJsonApi(data, type);
+    return this.postToEndpoint(endpoint, jsonApiData)
   }
 
   private static getFromEndpoint(endpoint) {
@@ -57,6 +58,15 @@ export class DiographApi {
     return promise.then((res, err) => {
       return res.body
     }, err => { throw err })
+  }
+
+  private static hashToJsonApi(obj, type) {
+    return {
+      "data": {
+        "type": type,
+        "attributes": obj
+      }
+    }
   }
 
 }
