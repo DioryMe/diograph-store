@@ -4,8 +4,8 @@
   "description": "",
   "main": "lib/diograph-store.js",
   "scripts": {
-    "compile": "tsc",
-    "test": "tsc -p tsconfig.test.json && jasmine JASMINE_CONFIG_PATH=jasmine.json"
+    "compile": "rm -r ./lib; tsc",
+    "test": "rm -r ./dist/spec; tsc -p tsconfig.test.json; jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },
   "author": "",
   "license": "ISC",
