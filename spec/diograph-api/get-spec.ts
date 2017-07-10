@@ -1,4 +1,5 @@
 import { DiographApi } from "../../app/lib/diograph-api"
+import * as ErrorHandler from "../../app/lib/error-handler"
 
 describe("Diograph API .get()", () => {
 
@@ -11,7 +12,7 @@ describe("Diograph API .get()", () => {
       expect(res.data.type).toEqual("diories");
       expect(res.data.id).toEqual("5691");
       done();
-    })
+    }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("returns a diory even though type is not given", (done) => {
@@ -19,7 +20,7 @@ describe("Diograph API .get()", () => {
       expect(res.data.type).toEqual("diories");
       expect(res.data.id).toEqual("5691");
       done();
-    })
+    }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("returns a connection if type is connections", (done) => {
@@ -27,21 +28,21 @@ describe("Diograph API .get()", () => {
       expect(res.data.type).toEqual("connections");
       expect(res.data.id).toEqual("9982");
       done();
-    })
+    }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("returns an 400 error if id is invalid", (done) => {
     DiographApi.get("invalid id", "connections").catch(err => {
       expect(err.errors[0].status).toBe("400");
       done();
-    })
+    }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("returns an 404 error if diory with the given id is not found", (done) => {
     DiographApi.get("99999999", "connections").catch(err => {
       expect(err.errors[0].status).toBe("404");
       done();
-    })
+    }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("throws an error if type is invalid", (done) => {

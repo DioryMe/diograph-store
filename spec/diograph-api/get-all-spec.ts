@@ -1,4 +1,5 @@
 import { DiographApi } from "../../app/lib/diograph-api"
+import * as ErrorHandler from "../../app/lib/error-handler"
 
 describe("Diograph API .getAll()", () => {
 
@@ -11,7 +12,7 @@ describe("Diograph API .getAll()", () => {
       expect(res.data).toEqual(jasmine.any(Array));
       expect(res.data[0].type).toEqual("diories");
       done();
-    })
+    }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("returns diories even though type is not given", (done) => {
@@ -19,7 +20,7 @@ describe("Diograph API .getAll()", () => {
       expect(res.data).toEqual(jasmine.any(Array));
       expect(res.data[0].type).toEqual("diories");
       done();
-    })
+    }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("returns error if invalid type is given", (done) => {

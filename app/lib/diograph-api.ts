@@ -44,7 +44,6 @@ export class DiographApi {
     return promise.then((res, err) => {
       return res.body
     }, err => {
-      console.log(err.response.body)
       throw err.response.body
     })
   }
@@ -59,7 +58,9 @@ export class DiographApi {
 
     return promise.then((res, err) => {
       return res.body
-    });
+    }, err => {
+      throw err
+    })
   }
 
 }

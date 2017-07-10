@@ -7,7 +7,7 @@ describe("Diograph API .create()", () => {
     DiographApi.authToken = "test-token"
   })
 
-  fit("creates a 'New diory'", (done) => {
+  it("creates a 'New diory'", (done) => {
     let data = { "name": "New diory" }
     DiographApi.create(data, "diories").then(res => {
       expect(res.data.type).toEqual("diories");
@@ -22,7 +22,7 @@ describe("Diograph API .create()", () => {
       expect(res.data.type).toEqual("diories");
       expect(res.data.name).toEqual("New diory");
       done();
-    })
+    }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("returns error if invalid type is given", (done) => {
