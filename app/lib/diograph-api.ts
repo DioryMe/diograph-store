@@ -36,6 +36,13 @@ export class DiographApi {
     return this.postToEndpoint(endpoint, jsonApiData)
   }
 
+  static update(id, data={}, type="diories") {
+    if (type !== "diories") { throw "Invalid type for DiographApi.update()" }
+    let endpoint = this.baseUrl + type + "/" + id
+    let jsonApiData = this.hashToJsonApi(data, type, id);
+    return this.putToEndpoint(endpoint, jsonApiData)
+  }
+
   private static getFromEndpoint(endpoint) {
     var promise = request
       .get(endpoint)
@@ -60,13 +67,30 @@ export class DiographApi {
     }, err => { throw err })
   }
 
-  private static hashToJsonApi(obj, type) {
-    return {
+  private static putToEndpoint(endpoint, data) {
+    var promise = request
+      .put(endpoint)
+      .send(data)
+      .set("Accept", "application/vnd.api+json")
+      .set("Content-Type", "application/vnd.api+json")
+      .set("Authorization", this.getAuthToken())
+
+    return promise.then((res, err) => {
+      return res.body
+    }, err => { throw err })
+  }
+
+  private static hashToJsonApi(obj, type, id=undefined) {
+    let jsonApiData = {
       "data": {
         "type": type,
         "attributes": obj
       }
     }
+    if (id) {
+      jsonApiData["data"]["id"] = id
+    }
+    return jsonApiData
   }
 
 }
