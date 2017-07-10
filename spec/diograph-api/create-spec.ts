@@ -8,19 +8,19 @@ describe("Diograph API .create()", () => {
   })
 
   it("creates a 'New diory'", (done) => {
-    let data = { "name": "New diory" }
+    let data = { "data": { "attributes": { "name": "New diory" }, "type": "diories"}}
     DiographApi.create(data, "diories").then(res => {
       expect(res.data.type).toEqual("diories");
-      expect(res.data.name).toEqual("New diory");
+      expect(res.data.attributes.name).toEqual("New diory");
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("creates a 'New diory' even though type is not given", (done) => {
-    let data = { "name": "New diory" }
+    let data = { "data": { "attributes": { "name": "New diory" }, "type": "diories"}}
     DiographApi.create(data).then(res => {
       expect(res.data.type).toEqual("diories");
-      expect(res.data.name).toEqual("New diory");
+      expect(res.data.attributes.name).toEqual("New diory");
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
