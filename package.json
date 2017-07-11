@@ -19,7 +19,6 @@
     "selenium-webdriver": "*"
   },
   "dependencies": {
-    "@types/es6-promise": "0.0.32",
     "jsonapi-datastore": "^0.4.0-beta",
     "superagent": "^3.5.2"
   }
