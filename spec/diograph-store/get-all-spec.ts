@@ -15,15 +15,15 @@ describe("DiographStore .getAll()", () => {
     });
   });
 
-  it("throws an error if invalid type is given", (done) => {
-    try {
-      DiographStore.getAll("invalid type")
-    }
-    catch(err) {
-      expect(err).toBe("Invalid type for DiographApi.getAll()");
-      done();
-    }
-  })
+  // it("throws an error if invalid type is given", (done) => {
+  //   try {
+  //     DiographStore.getAll("invalid type")
+  //   }
+  //   catch(err) {
+  //     expect(err).toBe("Invalid type for DiographApi.getAll()");
+  //     done();
+  //   }
+  // })
 
   describe("when diory type is given", () => {
 
