@@ -50,7 +50,7 @@ describe("Diograph API .getAll()", () => {
       })
     })
 
-    fit("returns given type of diories", (done) => {
+    it("returns given type of diories", (done) => {
       DiographApi.getAll("place").then(res => {
         expect(res.data).toEqual(jasmine.any(Array));
         expect(res.data.length).toBeTruthy();

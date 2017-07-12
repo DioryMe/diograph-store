@@ -24,7 +24,7 @@ export class DiographApi {
   }
 
   static getAll(type="diories") {
-    if (["diories", "places"].indexOf(type) >= 0) { throw "Invalid type for DiographApi.getAll()" }
+    if (["diories", "place"].indexOf(type) === -1) { throw "Invalid type for DiographApi.getAll()" }
     let endpoint = this.baseUrl + "diories"
     return this.getFromEndpoint(endpoint)
   }
