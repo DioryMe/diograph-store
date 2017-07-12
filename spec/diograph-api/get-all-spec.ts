@@ -33,4 +33,32 @@ describe("Diograph API .getAll()", () => {
     }
   })
 
+  describe("when diory type is given", () => {
+    var dioryId
+
+    beforeEach((done) => {
+      DiographApi.authToken = "test-token"
+      DiographApi.create({"name": "New place", "diory-type": "place"}).then((res) => {
+        dioryId = res.data.id
+        done()
+      })
+    })
+
+    afterEach((done) => {
+      DiographApi.delete(dioryId).then(res => {
+        done();
+      })
+    })
+
+    fit("returns given type of diories", (done) => {
+      DiographApi.getAll("place").then(res => {
+        expect(res.data).toEqual(jasmine.any(Array));
+        expect(res.data.length).toBeTruthy();
+        expect(res.data[0].type).toEqual("diories");
+        expect(res.data[0].attributes["diory-type"]).toEqual("place");
+        done();
+      }, (e) => { ErrorHandler.logAndFailTest(e); done();})
+    })
+  })
+
 })
