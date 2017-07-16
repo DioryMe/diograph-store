@@ -23,10 +23,10 @@ export class DiographApi {
     return this.getFromEndpoint(endpoint)
   }
 
-  static getAll(type="diories") {
-    if (["diories", "place"].indexOf(type) === -1) { throw "Invalid type for DiographApi.getAll()" }
+  static getAll(type=undefined) {
     let endpoint = this.baseUrl + "diories"
-    return this.getFromEndpoint(endpoint)
+    let query = type ? { filter: { diory_type: type }} : undefined
+    return this.getFromEndpoint(endpoint, query)
   }
 
   static create(data={}, type="diories") {
@@ -49,9 +49,10 @@ export class DiographApi {
     return this.deleteToEndpoint(endpoint)
   }
 
-  private static getFromEndpoint(endpoint) {
+  private static getFromEndpoint(endpoint, query={}) {
     var promise = request
       .get(endpoint)
+      .query(query)
       .set("Accept", "application/vnd.api+json")
       .set("Authorization", this.getAuthToken())
 

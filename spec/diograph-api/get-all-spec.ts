@@ -8,7 +8,7 @@ describe("Diograph API .getAll()", () => {
   })
 
   it("returns diories", (done) => {
-    DiographApi.getAll("diories").then(res => {
+    DiographApi.getAll().then(res => {
       expect(res.data).toEqual(jasmine.any(Array));
       expect(res.data[0].type).toEqual("diories");
       done();
@@ -21,16 +21,6 @@ describe("Diograph API .getAll()", () => {
       expect(res.data[0].type).toEqual("diories");
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
-  })
-
-  it("returns error if invalid type is given", (done) => {
-    try {
-      DiographApi.getAll("invalid type")
-    }
-    catch(err) {
-      expect(err).toBe("Invalid type for DiographApi.getAll()");
-      done();
-    }
   })
 
   describe("when diory type is given", () => {
