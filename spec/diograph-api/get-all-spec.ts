@@ -8,14 +8,6 @@ describe("Diograph API .getAll()", () => {
   })
 
   it("returns diories", (done) => {
-    DiographApi.getAll("diories").then(res => {
-      expect(res.data).toEqual(jasmine.any(Array));
-      expect(res.data[0].type).toEqual("diories");
-      done();
-    }, (e) => { ErrorHandler.logAndFailTest(e); done();})
-  })
-
-  it("returns diories even though type is not given", (done) => {
     DiographApi.getAll().then(res => {
       expect(res.data).toEqual(jasmine.any(Array));
       expect(res.data[0].type).toEqual("diories");
@@ -23,14 +15,41 @@ describe("Diograph API .getAll()", () => {
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
-  it("returns error if invalid type is given", (done) => {
-    try {
-      DiographApi.getAll("invalid type")
-    }
-    catch(err) {
-      expect(err).toBe("Invalid type for DiographApi.getAll()");
-      done();
-    }
+  describe("when diory type is given", () => {
+    var dioryId
+
+    beforeEach((done) => {
+      DiographApi.authToken = "test-token"
+      DiographApi.create({"name": "New place", "diory-type": "place"}).then((res) => {
+        dioryId = res.data.id
+        done()
+      })
+    })
+
+    afterEach((done) => {
+      DiographApi.delete(dioryId).then(res => {
+        done();
+      })
+    })
+
+    it("returns given type of diories", (done) => {
+      DiographApi.getAll("place").then(res => {
+        expect(res.data.length).toBeTruthy();
+        expect(res.data[0].attributes["diory-type"]).toEqual("place");
+        expect(res.data[res.data.length - 1].attributes["diory-type"]).toEqual("place");
+        done();
+      }, (e) => { ErrorHandler.logAndFailTest(e); done();})
+    })
+
+    it("returns error if invalid type is given", (done) => {
+      try {
+        DiographApi.getAll("invalid type")
+      }
+      catch(err) {
+        expect(err).toBe("Invalid type for DiographApi.getAll()");
+        done();
+      }
+    })
   })
 
 })
