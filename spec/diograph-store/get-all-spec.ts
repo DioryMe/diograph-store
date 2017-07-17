@@ -15,7 +15,4 @@ describe("DiographStore .getAll()", () => {
     });
   });
 
-  describe("when diory type is given", () => {
-
-  })
 });

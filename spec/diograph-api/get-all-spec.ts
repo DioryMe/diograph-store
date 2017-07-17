@@ -34,9 +34,7 @@ describe("Diograph API .getAll()", () => {
 
     it("returns given type of diories", (done) => {
       DiographApi.getAll("place").then(res => {
-        expect(res.data).toEqual(jasmine.any(Array));
         expect(res.data.length).toBeTruthy();
-        expect(res.data[0].type).toEqual("diories");
         expect(res.data[0].attributes["diory-type"]).toEqual("place");
         expect(res.data[res.data.length - 1].attributes["diory-type"]).toEqual("place");
         done();
