@@ -12,7 +12,6 @@ export class DiographApi {
     } else {
       throw "Authentication token is invalid."
     }
-
   }
 
   private static baseUrl = "http://diory-server.herokuapp.com/v1/"
@@ -30,6 +29,26 @@ export class DiographApi {
     return this.getFromEndpoint(endpoint)
   }
 
+  static create(data={}, type="diories") {
+    if (type !== "diories") { throw "Invalid type for DiographApi.create()" }
+    let endpoint = this.baseUrl + type
+    let jsonApiData = this.hashToJsonApi(data, type);
+    return this.postToEndpoint(endpoint, jsonApiData)
+  }
+
+  static update(id, data={}, type="diories") {
+    if (type !== "diories") { throw "Invalid type for DiographApi.update()" }
+    let endpoint = this.baseUrl + type + "/" + id
+    let jsonApiData = this.hashToJsonApi(data, type, id);
+    return this.putToEndpoint(endpoint, jsonApiData)
+  }
+
+  static delete(id, type="diories") {
+    if (type !== "diories") { throw "Invalid type for DiographApi.delete()" }
+    let endpoint = this.baseUrl + type + "/" + id
+    return this.deleteToEndpoint(endpoint)
+  }
+
   private static getFromEndpoint(endpoint) {
     var promise = request
       .get(endpoint)
@@ -38,9 +57,57 @@ export class DiographApi {
 
     return promise.then((res, err) => {
       return res.body
-    }).catch(err => {
-      throw err.response.body
-    })
+    }, err => { throw err })
+  }
+
+  private static postToEndpoint(endpoint, data) {
+    var promise = request
+      .post(endpoint)
+      .send(data)
+      .set("Accept", "application/vnd.api+json")
+      .set("Content-Type", "application/vnd.api+json")
+      .set("Authorization", this.getAuthToken())
+
+    return promise.then((res, err) => {
+      return res.body
+    }, err => { throw err })
+  }
+
+  private static putToEndpoint(endpoint, data) {
+    var promise = request
+      .put(endpoint)
+      .send(data)
+      .set("Accept", "application/vnd.api+json")
+      .set("Content-Type", "application/vnd.api+json")
+      .set("Authorization", this.getAuthToken())
+
+    return promise.then((res, err) => {
+      return res.body
+    }, err => { throw err })
+  }
+
+  private static deleteToEndpoint(endpoint) {
+    var promise = request
+      .delete(endpoint)
+      .set("Accept", "application/vnd.api+json")
+      .set("Authorization", this.getAuthToken())
+
+    return promise.then((res, err) => {
+      return res.status
+    }, err => { throw err })
+  }
+
+  private static hashToJsonApi(obj, type, id=undefined) {
+    let jsonApiData = {
+      "data": {
+        "type": type,
+        "attributes": obj
+      }
+    }
+    if (id) {
+      jsonApiData["data"]["id"] = id
+    }
+    return jsonApiData
   }
 
 }
