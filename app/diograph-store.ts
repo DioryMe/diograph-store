@@ -28,5 +28,12 @@ export class DiographStore {
     })
   }
 
+  static createDiory(obj): Promise<Diory> {
+    return DiographApi.create(obj).then(response => {
+      this.datastore.sync(response)
+      return new Diory(this.datastore.find("diories", response.id))
+    })
+  }
+
 }
 
