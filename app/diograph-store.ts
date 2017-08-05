@@ -34,6 +34,7 @@ export class DiographStore {
   }
 
   static createDiory(obj): Promise<Diory> {
+    if (obj === undefined) { throw "No object was given for DiographStore.createDiory()" }
     return DiographApi.create(obj).then(response => {
       this.datastore.sync(response)
       return new Diory(this.datastore.find("diories", response.data.id))
