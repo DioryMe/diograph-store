@@ -16,7 +16,7 @@ export class DiographStore {
 
   private static datastore = new JsonApiDataStore()
 
-  static get(id): Promise<Diory> {
+  static getDiory(id): Promise<Diory> {
     if (id === undefined) { throw "No id was given for DiographStore.get()" }
     return DiographApi.get(id).then(response => {
       this.datastore.sync(response)
@@ -24,7 +24,7 @@ export class DiographStore {
     })
   }
 
-  static getAll(): Promise<Diory[]> {
+  static getAllDiories(): Promise<Diory[]> {
     return DiographApi.getAll().then(response => {
       this.datastore.sync(response)
       return this.datastore.findAll("diories").map(diory => {
