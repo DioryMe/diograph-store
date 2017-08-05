@@ -1,5 +1,5 @@
-import { DiographApi } from "../../app/lib/diograph-api"
-import * as ErrorHandler from "../../app/lib/error-handler"
+import { DiographApi } from "../../../app/lib/diograph-api"
+import * as ErrorHandler from "../../../app/lib/error-handler"
 
 describe("Diograph API .update()", () => {
    var dioryId;

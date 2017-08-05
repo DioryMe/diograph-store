@@ -1,6 +1,6 @@
-import { DiographApi } from "../../app/lib/diograph-api"
-import { DiographStore } from "../../app/diograph-store"
-import * as ErrorHandler from "../../app/lib/error-handler"
+import { DiographApi } from "../../../app/lib/diograph-api"
+import { DiographStore } from "../../../app/diograph-store"
+import * as ErrorHandler from "../../../app/lib/error-handler"
 
 describe("Diograph API .create('connection')", () => {
   let diory1, diory2
