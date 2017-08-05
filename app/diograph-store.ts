@@ -2,6 +2,11 @@ import { JsonApiDataStore } from "jsonapi-datastore"
 import { Diory } from "./models/diory"
 import { DiographApi } from "./lib/diograph-api"
 
+// Better error message for Unhandled Promise rejections
+process.on('unhandledRejection', function(reason, p) {
+    console.log("Unhandled Rejection, reason: ", reason);
+});
+
 export class DiographStore {
 
   public static setAuthToken(token) {
