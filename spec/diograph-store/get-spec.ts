@@ -24,7 +24,9 @@ describe("DiographStore .get()", () => {
 
   it("throws an error if id is not given", (done) => {
     try {
-      DiographStore.get(undefined);
+      DiographStore.get(undefined).then(() => {
+        done.fail("No error was raised");
+      })
     }
     catch(err) {
       expect(err).toBe("No id was given for DiographStore.get()");

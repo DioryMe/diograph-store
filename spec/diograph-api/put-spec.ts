@@ -23,7 +23,9 @@ describe("Diograph API .update()", () => {
   it("returns error if invalid type is given", (done) => {
     let data = {"name": "New name"}
     try {
-      DiographApi.update(dioryId, data, "invalid type")
+      DiographApi.update(dioryId, data, "invalid type").then(() => {
+        done.fail("No error was raised");
+      })
     }
     catch(err) {
       expect(err).toBe("Invalid type for DiographApi.update()");

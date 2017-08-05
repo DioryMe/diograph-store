@@ -21,7 +21,9 @@ describe("Diograph API .delete()", () => {
 
   it("returns error if invalid type is given", (done) => {
     try {
-      DiographApi.delete(dioryId, "invalid type")
+      DiographApi.delete(dioryId, "invalid type").then(() => {
+        done.fail("No error was raised");
+      })
     }
     catch(err) {
       expect(err).toBe("Invalid type for DiographApi.delete()");
