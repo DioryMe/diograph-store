@@ -1,5 +1,6 @@
 import { JsonApiDataStore } from "jsonapi-datastore"
 import { Diory } from "./models/diory"
+import { Connection } from "./models/connection"
 import { DiographApi } from "./lib/diograph-api"
 
 // Better error message for Unhandled Promise rejections
@@ -38,6 +39,21 @@ export class DiographStore {
     return DiographApi.create(obj).then(response => {
       this.datastore.sync(response)
       return new Diory(this.datastore.find("diories", response.data.id))
+    })
+  }
+
+  static createConnection(obj): Promise<Connection> {
+    if (obj === undefined) { throw "No object was given for DiographStore.createConnection()" }
+    if (!(obj.fromDiory instanceof Diory) || !(obj.toDiory instanceof Diory)) {
+      throw "From-diory or to-diory missing from object given to DiographStore.createConnection()"
+    }
+    let requestObject = {
+      "from-diory-id": obj.fromDiory.id,
+      "to-diory-id": obj.toDiory.id
+    }
+    return DiographApi.create(requestObject, "connections").then(response => {
+      this.datastore.sync(response)
+      return new Connection(this.datastore.find("connections", response.data.id))
     })
   }
 

@@ -18,13 +18,13 @@ describe("DiographStore .createConnection()", () => {
 
   it("returns Connection when success", (done) => {
     let obj = {
-      "from-diory": diory1,
-      "to-diory": diory2
+      fromDiory: diory1,
+      toDiory: diory2
     }
     DiographStore.createConnection(obj).then(connection => {
       expect(connection).toEqual(jasmine.any(Connection));
-      expect(connection["from-diory"].id).toBe(obj["from-diory"].id);
-      expect(connection["to-diory"].id).toBe(obj["to-diory"].id);
+      expect(connection.fromDioryId + '').toBe(obj.fromDiory.id);
+      expect(connection.toDioryId + '').toBe(obj.toDiory.id);
       done();
     });
   });
@@ -48,7 +48,7 @@ describe("DiographStore .createConnection()", () => {
       })
     }
     catch(err) {
-      expect(err).toBe("From-diory-id or to-diory-id missing from object given to DiographStore.createConnection()");
+      expect(err).toBe("From-diory or to-diory missing from object given to DiographStore.createConnection()");
       done();
     }
   })
