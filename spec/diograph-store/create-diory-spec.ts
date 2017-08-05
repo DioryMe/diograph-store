@@ -20,7 +20,9 @@ describe("DiographStore .createDiory()", () => {
 
   it("throws an error if object is empty", (done) => {
     try {
-      DiographStore.createDiory({});
+      DiographStore.createDiory({}).then(() => {
+        done.fail("No error was raised");
+      })
     }
     catch(err) {
       expect(err).toBe("Empty object was given for DiographStore.createDiory()");
@@ -30,7 +32,9 @@ describe("DiographStore .createDiory()", () => {
 
   it("throws an error if object is not given", (done) => {
     try {
-      DiographStore.createDiory(undefined);
+      DiographStore.createDiory(undefined).then(() => {
+        done.fail("No error was raised");
+      })
     }
     catch(err) {
       expect(err).toBe("No object was given for DiographStore.createDiory()");
