@@ -29,7 +29,7 @@ describe("DiographStore .get()", () => {
       })
     }
     catch(err) {
-      expect(err).toBe("No id was given for DiographStore.get()");
+      expect(err).toBe("No id was given for DiographStore.getDiory()");
       done();
     }
   })

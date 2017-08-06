@@ -8,6 +8,15 @@ process.on('unhandledRejection', function(reason, p) {
     console.log("Unhandled Rejection, reason: ", reason);
 });
 
+// Promise.all() requires this to work
+declare var Promise: any;
+
+export interface ConnectionObject {
+  fromDiory: Diory;
+  toDiory: Diory;
+  connection: Connection;
+}
+
 export class DiographStore {
 
   public static setAuthToken(token) {
@@ -18,7 +27,7 @@ export class DiographStore {
   private static datastore = new JsonApiDataStore()
 
   static getDiory(id): Promise<Diory> {
-    if (id === undefined) { throw "No id was given for DiographStore.get()" }
+    if (id === undefined) { throw "No id was given for DiographStore.getDiory()" }
     return DiographApi.get(id).then(response => {
       this.datastore.sync(response)
       return new Diory(this.datastore.find("diories", id))
@@ -42,18 +51,28 @@ export class DiographStore {
     })
   }
 
-  static createConnection(obj): Promise<Connection> {
-    if (obj === undefined) { throw "No object was given for DiographStore.createConnection()" }
-    if (!(obj.fromDiory instanceof Diory) || !(obj.toDiory instanceof Diory)) {
-      throw "From-diory or to-diory missing from object given to DiographStore.createConnection()"
-    }
-    let requestObject = {
-      "from-diory-id": obj.fromDiory.id,
-      "to-diory-id": obj.toDiory.id
-    }
-    return DiographApi.create(requestObject, "connections").then(response => {
-      this.datastore.sync(response)
-      return new Connection(this.datastore.find("connections", response.data.id))
+  static connectDiories(fromDioryId, toDioryId): Promise<ConnectionObject> {
+    let fromDiory, toDiory
+    if (fromDioryId === undefined || toDioryId === undefined) { throw "DiographStore.connectDiories() requires two parameters" }
+    let fromDioryPromise = this.getDiory(fromDioryId).then((diory) => {
+      fromDiory = diory
+    })
+    let toDioryPromise = this.getDiory(toDioryId).then((diory) => {
+      toDiory = diory
+    })
+    return Promise.all([fromDioryPromise, toDioryPromise]).then(() => {
+      let requestObject = {
+        "from-diory-id": fromDiory.id,
+        "to-diory-id": toDiory.id
+      }
+      return DiographApi.create(requestObject, "connections").then(response => {
+        this.datastore.sync(response)
+        return {
+          fromDiory: fromDiory,
+          toDiory: toDiory,
+          connection: new Connection(this.datastore.find("connections", response.data.id))
+        }
+      })
     })
   }
 
