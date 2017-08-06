@@ -76,7 +76,7 @@ export class DiographStore {
     })
   }
 
-  static createAndConnect(obj, fromDioryId): Promise<ConnectionObject> {
+  static createAndConnectDiory(obj, fromDioryId): Promise<ConnectionObject> {
     return this.createDiory(obj).then(createdDiory => {
       return this.connectDiories(fromDioryId, createdDiory.id).then(connectionObject => {
         return connectionObject;
