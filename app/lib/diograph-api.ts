@@ -39,9 +39,9 @@ export class DiographApi {
   }
 
   static update(id, data={}, type="diories") {
-    if (type !== "diories") { throw "Invalid type for DiographApi.update()" }
     if (id === undefined) { throw "No id was given for DiographApi.update()" }
     if (!(data instanceof Object)) { throw "Data given for DiographApi.update() wasn't an object"}
+    if (type !== "diories") { throw "Invalid type for DiographApi.update()" }
     let endpoint = this.baseUrl + type + "/" + id
     let jsonApiData = this.hashToJsonApi(data, type, id);
     return this.putToEndpoint(endpoint, jsonApiData)
