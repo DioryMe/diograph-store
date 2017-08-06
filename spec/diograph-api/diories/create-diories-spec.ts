@@ -1,7 +1,7 @@
 import { DiographApi } from "../../../app/lib/diograph-api"
 import * as ErrorHandler from "../../../app/lib/error-handler"
 
-describe("Diograph API .create()", () => {
+describe("Diograph API .create('diories')", () => {
 
   beforeEach(() => {
     DiographApi.authToken = "test-token"
@@ -33,6 +33,18 @@ describe("Diograph API .create()", () => {
     }
     catch(err) {
       expect(err).toBe("Invalid type for DiographApi.create()");
+      done();
+    }
+  })
+
+  it("throws an error if first parameter is something else than an object", (done) => {
+    try {
+      DiographApi.create("this should be an {}").then(() => {
+        done.fail("No error was raised");
+      })
+    }
+    catch(err) {
+      expect(err).toBe("Data given for DiographApi.create() wasn't an object");
       done();
     }
   })
