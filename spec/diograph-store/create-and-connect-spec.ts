@@ -28,4 +28,28 @@ describe("DiographStore .createDiory()", () => {
     });
   });
 
+  it("throws an error if first parameter is something else than an object", (done) => {
+    try {
+      DiographStore.createAndConnectDiory("this should be an {}", 123).then(() => {
+        done.fail("No error was raised");
+      })
+    }
+    catch(err) {
+      expect(err).toBe("Data given for DiographStore.createAndConnectDiory() wasn't an object");
+      done();
+    }
+  })
+
+  it("throws an error if less than two parameters are given", (done) => {
+    try {
+      DiographStore.createAndConnectDiory({}, undefined).then(() => {
+        done.fail("No error was raised");
+      })
+    }
+    catch(err) {
+      expect(err).toBe("DiographStore.createAndConnectDiory() requires two parameters");
+      done();
+    }
+  })
+
 });
