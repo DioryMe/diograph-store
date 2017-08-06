@@ -25,7 +25,7 @@ describe("DiographStore .createDiory()", () => {
       })
     }
     catch(err) {
-      expect(err).toBe("No object was given for DiographStore.createDiory()");
+      expect(err).toBe("Data given for DiographStore.createDiory() wasn't an object");
       done();
     }
   })

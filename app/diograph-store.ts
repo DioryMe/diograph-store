@@ -44,7 +44,7 @@ export class DiographStore {
   }
 
   static createDiory(obj): Promise<Diory> {
-    if (obj === undefined) { throw "No object was given for DiographStore.createDiory()" }
+    if (!(obj instanceof Object)) { throw "Data given for DiographStore.createDiory() wasn't an object"}
     return DiographApi.create(obj).then(response => {
       this.datastore.sync(response)
       return new Diory(this.datastore.find("diories", response.data.id))
@@ -52,8 +52,8 @@ export class DiographStore {
   }
 
   static connectDiories(fromDioryId, toDioryId): Promise<ConnectionObject> {
-    let fromDiory, toDiory
     if (fromDioryId === undefined || toDioryId === undefined) { throw "DiographStore.connectDiories() requires two parameters" }
+    let fromDiory, toDiory
     let fromDioryPromise = this.getDiory(fromDioryId).then((diory) => {
       fromDiory = diory
     })
@@ -77,6 +77,8 @@ export class DiographStore {
   }
 
   static createAndConnectDiory(obj, fromDioryId): Promise<ConnectionObject> {
+    if (!(obj instanceof Object)) { throw "Data given for DiographStore.createAndConnectDiory() wasn't an object"}
+    if (fromDioryId === undefined) { throw "DiographStore.createAndConnectDiory() requires two parameters" }
     return this.createDiory(obj).then(createdDiory => {
       return this.connectDiories(fromDioryId, createdDiory.id).then(connectionObject => {
         return connectionObject;
