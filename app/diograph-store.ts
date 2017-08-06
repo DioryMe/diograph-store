@@ -57,7 +57,7 @@ export class DiographStore {
     let fromDioryPromise = this.getDiory(fromDioryId).then((diory) => {
       fromDiory = diory
     })
-    let toDioryPromise = this.getDiory(toDioryId).then((diory) => {
+    let toDioryPromise = this.getDiory(toDioryId).then(diory => {
       toDiory = diory
     })
     return Promise.all([fromDioryPromise, toDioryPromise]).then(() => {
@@ -72,6 +72,14 @@ export class DiographStore {
           toDiory: toDiory,
           connection: new Connection(this.datastore.find("connections", response.data.id))
         }
+      })
+    })
+  }
+
+  static createAndConnect(obj, fromDioryId): Promise<ConnectionObject> {
+    return this.createDiory(obj).then(createdDiory => {
+      return this.connectDiories(fromDioryId, createdDiory.id).then(connectionObject => {
+        return connectionObject;
       })
     })
   }
