@@ -48,8 +48,8 @@ export class DiographApi {
   }
 
   static delete(id, type="diories") {
-    if (type !== "diories") { throw "Invalid type for DiographApi.delete()" }
     if (id === undefined) { throw "No id was given for DiographApi.delete()" }
+    if (type !== "diories") { throw "Invalid type for DiographApi.delete()" }
     let endpoint = this.baseUrl + type + "/" + id
     return this.deleteToEndpoint(endpoint)
   }
