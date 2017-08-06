@@ -34,8 +34,8 @@ export class DiographStore {
     })
   }
 
-  static getAllDiories(): Promise<Diory[]> {
-    return DiographApi.getAll().then(response => {
+  static getAllDiories(type=undefined): Promise<Diory[]> {
+    return DiographApi.getAll(type).then(response => {
       this.datastore.sync(response)
       return this.datastore.findAll("diories").map(diory => {
         return new Diory(diory)
