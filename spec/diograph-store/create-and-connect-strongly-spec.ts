@@ -3,7 +3,7 @@ import { DiographStore } from "../../app/diograph-store"
 import { Diory } from "../../app/models/diory"
 import { Connection } from "../../app/models/connection"
 
-describe("DiographStore .createAndConnectDiory()", () => {
+describe("DiographStore .createAndConnectDioryStrongly()", () => {
   let diory1
 
   beforeAll((done) => {
@@ -18,19 +18,25 @@ describe("DiographStore .createAndConnectDiory()", () => {
     let obj = {
       name: "Created diory"
     }
-    DiographStore.createAndConnectDiory(obj, diory1.id).then(connectionObject => {
+    DiographStore.createAndConnectDioryStrongly(obj, diory1.id).then(connectionObject => {
       expect(connectionObject.fromDiory).toEqual(jasmine.any(Diory));
       expect(connectionObject.toDiory).toEqual(jasmine.any(Diory));
       expect(connectionObject.connection).toEqual(jasmine.any(Connection));
+
       expect(connectionObject.connection.fromDioryId + '').toBe(diory1.id);
+      expect(connectionObject.connection.toDioryId + '').toBe(connectionObject.toDiory.id);
+
       expect(connectionObject.toDiory.name + '').toBe(obj.name);
+
+      expect(connectionObject.fromDiory.connectedDiories[0].id).toEqual(connectionObject.toDiory.id)
+      // expect(connectionObject.toDiory.connectedDiories[0].id).toEqual(connectionObject.fromDiory.id)
       done();
     });
   });
 
   it("throws an error if first parameter is something else than an object", (done) => {
     try {
-      DiographStore.createAndConnectDiory("this should be an {}", 123).then(() => {
+      DiographStore.createAndConnectDioryStrongly("this should be an {}", 123).then(() => {
         done.fail("No error was raised");
       })
     }
@@ -42,7 +48,7 @@ describe("DiographStore .createAndConnectDiory()", () => {
 
   it("throws an error if less than two parameters are given", (done) => {
     try {
-      DiographStore.createAndConnectDiory({}, undefined).then(() => {
+      DiographStore.createAndConnectDioryStrongly({}, undefined).then(() => {
         done.fail("No error was raised");
       })
     }
