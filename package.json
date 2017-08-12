@@ -5,7 +5,7 @@
   "main": "lib/diograph-store.js",
   "scripts": {
     "compile": "rm -r ./lib; tsc",
-    "test": "rm -r ./dist/spec; tsc -p tsconfig.test.json; jasmine JASMINE_CONFIG_PATH=jasmine.json"
+    "test": "rm -r ./dist; tsc -p tsconfig.test.json; jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },
   "author": "",
   "license": "ISC",
