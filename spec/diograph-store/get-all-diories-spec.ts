@@ -3,7 +3,10 @@ import { DiographApi } from "../../app/lib/diograph-api"
 import { Diory } from "../../app/models/diory"
 import * as ErrorHandler from "../../app/lib/error-handler"
 
-describe("DiographStore .getAll()", () => {
+// Promise.all() requires this to work
+declare var Promise: any;
+
+describe("DiographStore .getAllDiories()", () => {
 
   beforeEach(() => {
     DiographStore.setAuthToken("test-token")
@@ -27,8 +30,12 @@ describe("DiographStore .getAll()", () => {
         "name": "New place",
         "diory-type": "place"
       }
-      DiographStore.createDiory(obj).then((createdDiory) => {
+      let promise1 = DiographStore.createDiory(obj).then((createdDiory) => {
         diory = createdDiory
+      })
+      // Adds existing content to the JSONApiDatastore
+      let promise2 = DiographStore.getAllDiories()
+      Promise.all([promise1, promise2]).then(() => {
         done()
       })
     })
@@ -41,8 +48,7 @@ describe("DiographStore .getAll()", () => {
 
     it("returns given type of diories", (done) => {
       DiographStore.getAllDiories("place").then(diories => {
-        expect(diories[0].type).toEqual("place");
-        expect(diories[diories.length - 1].type).toEqual("place");
+        expect(diories.every(diory => { return diory.type === "place" })).toBe(true);
         done();
       }, (e) => { ErrorHandler.logAndFailTest(e); done();})
     })
