@@ -35,9 +35,18 @@ export class DiographStore {
   }
 
   static getAllDiories(type=undefined): Promise<Diory[]> {
+    let dioryJSONs, dioryIds
     return DiographApi.getAll(type).then(response => {
       this.datastore.sync(response)
-      return this.datastore.findAll("diories").map(diory => {
+      if (type) {
+        let dioryIds = response["data"].map(dioryJSON => { return dioryJSON["id"]})
+        dioryJSONs = this.datastore.findAll("diories").filter(dioryData => {
+          return dioryIds.includes(dioryData.id)
+        })
+      } else {
+        dioryJSONs = this.datastore.findAll("diories")
+      }
+      return dioryJSONs.map(diory => {
         return new Diory(diory)
       })
     })
