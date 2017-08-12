@@ -95,5 +95,13 @@ export class DiographStore {
     })
   }
 
+  static createAndConnectDioryStrongly(obj, fromDioryId): Promise<ConnectionObject> {
+    return this.createAndConnectDiory(obj, fromDioryId).then(connectionObject => {
+      return this.connectDiories(connectionObject.toDiory.id, connectionObject.fromDiory.id).then(() => {
+        return connectionObject;
+      })
+    })
+  }
+
 }
 
