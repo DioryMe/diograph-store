@@ -15,6 +15,10 @@ describe("Diory spec", () => {
     let placeFixtureDatastore = datastore.find("diories", placeFixture.data.id)
     let diory = new Diory(placeFixtureDatastore)
     expect(diory.name).toEqual("Uusi paikka")
+    expect(diory.connectedDiories.length).toEqual(1)
+    expect(diory.connectedDiories[0].id).toEqual("6284")
+    expect(diory.connectedDiories[0].name).toEqual("Uusi paikka - 6.8.2017 - 19:45")
+    expect(diory.connectedDiories[0].type).toEqual("check-in")
   })
 
 })
