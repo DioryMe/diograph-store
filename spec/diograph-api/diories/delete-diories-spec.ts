@@ -1,5 +1,5 @@
-import { DiographApi } from "../../app/lib/diograph-api"
-import * as ErrorHandler from "../../app/lib/error-handler"
+import { DiographApi } from "../../../app/lib/diograph-api"
+import * as ErrorHandler from "../../../app/lib/error-handler"
 
 describe("Diograph API .delete()", () => {
    var dioryId;
@@ -19,14 +19,27 @@ describe("Diograph API .delete()", () => {
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
+  it("throws an error if id is not given", (done) => {
+    try {
+      DiographApi.delete(undefined).then(() => {
+        done.fail("No error was raised");
+      })
+    }
+    catch(err) {
+      expect(err).toBe("No id was given for DiographApi.delete()");
+      done();
+    }
+  })
+
   it("returns error if invalid type is given", (done) => {
     try {
-      DiographApi.delete(dioryId, "invalid type")
+      DiographApi.delete(dioryId, "invalid type").then(() => {
+        done.fail("No error was raised");
+      })
     }
     catch(err) {
       expect(err).toBe("Invalid type for DiographApi.delete()");
       done();
     }
   })
-
 })

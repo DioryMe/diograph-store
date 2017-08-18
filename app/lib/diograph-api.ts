@@ -26,18 +26,21 @@ export class DiographApi {
   static getAll(type=undefined) {
     if (type && ["place", "check-in"].indexOf(type) < 0) { throw "Invalid type for DiographApi.getAll()" }
     let endpoint = this.baseUrl + "diories"
-    let query = type ? { filter: { diory_type: type }} : undefined
+    let query = type ? { filter: { diory_type: type }, include: "connected-diories,connections" } : undefined
     return this.getFromEndpoint(endpoint, query)
   }
 
   static create(data={}, type="diories") {
-    if (type !== "diories") { throw "Invalid type for DiographApi.create()" }
+    if (!(data instanceof Object)) { throw "Data given for DiographApi.create() wasn't an object"}
+    if (type !== "diories" && type !== "connections") { throw "Invalid type for DiographApi.create()" }
     let endpoint = this.baseUrl + type
     let jsonApiData = this.hashToJsonApi(data, type);
     return this.postToEndpoint(endpoint, jsonApiData)
   }
 
   static update(id, data={}, type="diories") {
+    if (id === undefined) { throw "No id was given for DiographApi.update()" }
+    if (!(data instanceof Object)) { throw "Data given for DiographApi.update() wasn't an object"}
     if (type !== "diories") { throw "Invalid type for DiographApi.update()" }
     let endpoint = this.baseUrl + type + "/" + id
     let jsonApiData = this.hashToJsonApi(data, type, id);
@@ -45,6 +48,7 @@ export class DiographApi {
   }
 
   static delete(id, type="diories") {
+    if (id === undefined) { throw "No id was given for DiographApi.delete()" }
     if (type !== "diories") { throw "Invalid type for DiographApi.delete()" }
     let endpoint = this.baseUrl + type + "/" + id
     return this.deleteToEndpoint(endpoint)

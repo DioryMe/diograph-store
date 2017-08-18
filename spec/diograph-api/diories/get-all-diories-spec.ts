@@ -1,5 +1,5 @@
-import { DiographApi } from "../../app/lib/diograph-api"
-import * as ErrorHandler from "../../app/lib/error-handler"
+import { DiographApi } from "../../../app/lib/diograph-api"
+import * as ErrorHandler from "../../../app/lib/error-handler"
 
 describe("Diograph API .getAll()", () => {
 
@@ -43,7 +43,9 @@ describe("Diograph API .getAll()", () => {
 
     it("returns error if invalid type is given", (done) => {
       try {
-        DiographApi.getAll("invalid type")
+        DiographApi.getAll("invalid type").then(() => {
+          done.fail("No error was raised");
+        })
       }
       catch(err) {
         expect(err).toBe("Invalid type for DiographApi.getAll()");
