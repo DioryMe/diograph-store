@@ -14,8 +14,8 @@ export class DiographApi {
     }
   }
 
-  // private static baseUrl = "http://diory-server.herokuapp.com/v1/";
-  private static baseUrl = "http://localhost:3000/v1/";
+  private static baseUrl = "http://diory-server.herokuapp.com/v1/";
+  // private static baseUrl = "http://localhost:3000/v1/";
   // private static baseUrl = localStorage.getItem("endpoint")
 
   static get(id, type="diories") {
