@@ -28,7 +28,8 @@ describe("Diory spec", () => {
     })
 
     it("has geo attributes", () => {
-      expect(diory.latitude).toEqual("123")
+      expect(diory.geo.latitude).toEqual("23.989414")
+      expect(diory.geo.longitude).toEqual("61.470926")
     })
 
   })

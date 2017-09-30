@@ -17,6 +17,7 @@ export class Diory {
     this.type = data["diory-type"];
     this.background = data.background;
     this.date = data.date;
+    this.geo = data.geo;
     if (data["connected-diories"]) {
       this.addConnectedDiories(data["connected-diories"])
     }
