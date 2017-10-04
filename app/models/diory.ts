@@ -7,6 +7,7 @@ export class Diory {
   public type: string;
   public background: string;
   public date: string;
+  public geo: string;
   public connectedDiories = [];
 
   constructor(data) {
