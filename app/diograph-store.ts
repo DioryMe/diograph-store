@@ -54,7 +54,8 @@ export class DiographStore {
 
   static createDiory(obj): Promise<Diory> {
     if (!(obj instanceof Object)) { throw "Data given for DiographStore.createDiory() wasn't an object"}
-    return DiographApi.create(obj).then(response => {
+    let requestObj = this.convertResponseObjectToRequestObject(obj)
+    return DiographApi.create(requestObj).then(response => {
       this.datastore.sync(response)
       return new Diory(this.datastore.find("diories", response.data.id))
     })
@@ -103,6 +104,17 @@ export class DiographStore {
         return connectionObject;
       })
     })
+  }
+
+  // Private
+
+  static convertResponseObjectToRequestObject(obj) {
+    if (obj["geo"] != undefined) {
+      obj["latitude"] = obj["geo"]["latitude"]
+      obj["longitude"] = obj["geo"]["longitude"]
+      delete obj["geo"]
+    }
+    return obj
   }
 
 }
