@@ -6,7 +6,7 @@ describe("Diograph API .create('connection')", () => {
   let diory1, diory2
 
   beforeAll((done) => {
-    DiographApi.authToken = "test-token"
+    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
     DiographStore.getAllDiories().then(diories => {
       diory1 = diories[0]
       diory2 = diories[1]
@@ -20,7 +20,9 @@ describe("Diograph API .create('connection')", () => {
       expect(res.data.type).toEqual("connections");
       expect(res.data.attributes["from-diory-id"]).toEqual(parseInt(diory1.id));
       expect(res.data.attributes["to-diory-id"]).toEqual(parseInt(diory2.id));
-      done();
+      // DiographApi.delete(res.data.id, "connections").then(res => {
+        done();
+      // })
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 

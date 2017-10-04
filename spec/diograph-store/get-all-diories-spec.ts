@@ -9,7 +9,7 @@ declare var Promise: any;
 describe("DiographStore .getAllDiories()", () => {
 
   beforeEach(() => {
-    DiographStore.setAuthToken("test-token")
+    DiographStore.setAuthToken("df548369-d0a2-4ca5-b28a-dd4fb14c1f08")
   })
 
   it("returns array of Diories if no type is given", (done) => {
@@ -25,7 +25,7 @@ describe("DiographStore .getAllDiories()", () => {
     var diory
 
     beforeEach((done) => {
-      DiographStore.setAuthToken("test-token")
+      DiographStore.setAuthToken("df548369-d0a2-4ca5-b28a-dd4fb14c1f08")
       let obj = {
         "name": "New place",
         "diory-type": "place"

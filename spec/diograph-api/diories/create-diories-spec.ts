@@ -4,7 +4,7 @@ import * as ErrorHandler from "../../../app/lib/error-handler"
 describe("Diograph API .create('diories')", () => {
 
   beforeEach(() => {
-    DiographApi.authToken = "test-token"
+    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
   })
 
   it("creates a 'New diory'", (done) => {
@@ -12,7 +12,9 @@ describe("Diograph API .create('diories')", () => {
     DiographApi.create(data, "diories").then(res => {
       expect(res.data.type).toEqual("diories");
       expect(res.data.attributes.name).toEqual("New diory");
-      done();
+      DiographApi.delete(res.data.id).then(res => {
+        done();
+      })
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
@@ -21,7 +23,9 @@ describe("Diograph API .create('diories')", () => {
     DiographApi.create(data).then(res => {
       expect(res.data.type).toEqual("diories");
       expect(res.data.attributes.name).toEqual("New diory");
-      done();
+      DiographApi.delete(res.data.id).then(res => {
+        done();
+      })
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 

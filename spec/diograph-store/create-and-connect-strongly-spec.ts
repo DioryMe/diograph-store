@@ -6,11 +6,17 @@ import { Connection } from "../../app/models/connection"
 describe("DiographStore .createAndConnectDioryStrongly()", () => {
   let diory1
 
-  beforeAll((done) => {
-    DiographApi.authToken = "test-token"
-    DiographStore.getAllDiories().then(diories => {
-      diory1 = diories[0]
+  beforeEach((done) => {
+    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
+    DiographStore.createDiory({"name": "Diory to be strongly connected from"}).then(diory => {
+      diory1 = diory
       done()
+    })
+  })
+
+  afterEach((done) => {
+    DiographApi.delete(diory1.id).then(res => {
+      done();
     })
   })
 
@@ -30,7 +36,9 @@ describe("DiographStore .createAndConnectDioryStrongly()", () => {
 
       expect(connectionObject.fromDiory.connectedDiories[0].id).toEqual(connectionObject.toDiory.id)
       // expect(connectionObject.toDiory.connectedDiories[0].id).toEqual(connectionObject.fromDiory.id)
-      done();
+      DiographApi.delete(connectionObject.toDiory.id).then(res => {
+        done();
+      })
     });
   });
 

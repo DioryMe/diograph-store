@@ -4,29 +4,29 @@ import * as ErrorHandler from "../../../app/lib/error-handler"
 describe("Diograph API .get()", () => {
 
   beforeEach(() => {
-    DiographApi.authToken = "test-token"
+    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
   })
 
   it("returns a diory if type is diories", (done) => {
-    DiographApi.get("5691", "diories").then(res => {
+    DiographApi.get("1", "diories").then(res => {
       expect(res.data.type).toEqual("diories");
-      expect(res.data.id).toEqual("5691");
+      expect(res.data.id).toEqual("1");
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("returns a diory even though type is not given", (done) => {
-    DiographApi.get("5691").then(res => {
+    DiographApi.get("1").then(res => {
       expect(res.data.type).toEqual("diories");
-      expect(res.data.id).toEqual("5691");
+      expect(res.data.id).toEqual("1");
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("returns a connection if type is connections", (done) => {
-    DiographApi.get("9982", "connections").then(res => {
+    DiographApi.get("1", "connections").then(res => {
       expect(res.data.type).toEqual("connections");
-      expect(res.data.id).toEqual("9982");
+      expect(res.data.id).toEqual("1");
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })

@@ -7,7 +7,7 @@ describe("DiographStore .createAndConnectDiory()", () => {
   let diory1
 
   beforeAll((done) => {
-    DiographApi.authToken = "test-token"
+    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
     DiographStore.getAllDiories().then(diories => {
       diory1 = diories[0]
       done()
@@ -24,7 +24,9 @@ describe("DiographStore .createAndConnectDiory()", () => {
       expect(connectionObject.connection).toEqual(jasmine.any(Connection));
       expect(connectionObject.connection.fromDioryId + '').toBe(diory1.id);
       expect(connectionObject.toDiory.name + '').toBe(obj.name);
-      done();
+      DiographApi.delete(connectionObject.toDiory.id).then(res => {
+        done();
+      })
     });
   });
 

@@ -4,7 +4,7 @@ import * as ErrorHandler from "../../../app/lib/error-handler"
 describe("Diograph API .getAll()", () => {
 
   beforeEach(() => {
-    DiographApi.authToken = "test-token"
+    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
   })
 
   it("returns diories", (done) => {
@@ -19,7 +19,7 @@ describe("Diograph API .getAll()", () => {
     var dioryId
 
     beforeEach((done) => {
-      DiographApi.authToken = "test-token"
+      DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
       DiographApi.create({"name": "New place", "diory-type": "place"}).then((res) => {
         dioryId = res.data.id
         done()
