@@ -19,18 +19,18 @@ describe("DiographStore .updateDiory()", () => {
         DiographApi.delete(diory.id).then(res => {
           done();
         })
-      }
+      })
     });
   });
 
   it("throws an error if id is not given", (done) => {
     try {
-      DiographStore.updateDiory(undefined, undefined).then(() => {
+      DiographStore.updateDiory(undefined, {name: "New name"}).then(() => {
         done.fail("No error was raised");
       })
     }
     catch(err) {
-      expect(err).toBe("Invalid diory id given for DiographStore.updateDiory()");
+      expect(err).toBe("No id was given for DiographStore.updateDiory()");
       done();
     }
   })

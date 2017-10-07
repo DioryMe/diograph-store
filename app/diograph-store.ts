@@ -61,6 +61,16 @@ export class DiographStore {
     })
   }
 
+  static updateDiory(id, obj): Promise<Diory> {
+    if (id === undefined) { throw "No id was given for DiographStore.updateDiory()" }
+    if (!(obj instanceof Object)) { throw "Data given for DiographStore.updateDiory() wasn't an object"}
+    let requestObj = this.convertResponseObjectToRequestObject(obj)
+    return DiographApi.update(id, requestObj).then(response => {
+      this.datastore.sync(response)
+      return new Diory(this.datastore.find("diories", response.data.id))
+    })
+  }
+
   static connectDiories(fromDioryId, toDioryId): Promise<ConnectionObject> {
     if (fromDioryId === undefined || toDioryId === undefined) { throw "DiographStore.connectDiories() requires two parameters" }
     let fromDiory, toDiory
