@@ -38,7 +38,7 @@ describe("Diograph API .update()", () => {
     }
   })
 
-  it("throws an error if first parameter is something else than an object", (done) => {
+  it("throws an error if second parameter is something else than an object", (done) => {
     try {
       DiographApi.update(123, "this should be an {}", "diories").then(() => {
         done.fail("No error was raised");
