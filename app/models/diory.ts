@@ -10,7 +10,7 @@ export class Diory {
   public geo: string;
   public connectedDiories = [];
 
-  constructor(data) {
+  constructor(data, addConnectedDiories=true) {
     // If attribute is null, change it to undefined
     for (var attrname in data) { if (data[attrname] == null) { data[attrname] = undefined } }
     for (var attrname in data.geo) { if (data.geo[attrname] == null) { data.geo[attrname] = undefined } }
@@ -22,15 +22,17 @@ export class Diory {
     this.background = data.background;
     this.date = data.date;
     this.geo = data.geo;
-    if (data["connected-diories"]) {
-      this.addConnectedDiories(data["connected-diories"])
+    if (data["connected-diories"] && addConnectedDiories) {
+      this.addConnectedDiories(data)
     }
   }
 
-  private addConnectedDiories(connectedDioriesData) {
-    connectedDioriesData.forEach((connectedDioryData) => {
-      let connectedDiory = new Diory(connectedDioryData)
-      this.connectedDiories.push(connectedDiory)
+  private addConnectedDiories(dioryData) {
+    dioryData["connected-diories"].forEach((connectedDioryData) => {
+      if (connectedDioryData.id !== dioryData.id) {
+        let connectedDiory = new Diory(connectedDioryData, false)
+        this.connectedDiories.push(connectedDiory)
+      }
     })
   }
 
