@@ -32,6 +32,10 @@ describe("Diory spec", () => {
       expect(diory.geo.longitude).toEqual("61.470926")
     })
 
+    it("has undefined if value is null", () => {
+      expect(diory.date).toEqual(undefined)
+    })
+
   })
 
 })

@@ -11,6 +11,9 @@ export class Diory {
   public connectedDiories = [];
 
   constructor(data) {
+    // If attribute is null, change it to undefined
+    for (var attrname in data) { if (data[attrname] == null) { data[attrname] = undefined } }
+    for (var attrname in data.geo) { if (data.geo[attrname] == null) { data.geo[attrname] = undefined } }
     if (data === undefined) { data = {} };
     this.id = data.id;
     this.name = data.name;
