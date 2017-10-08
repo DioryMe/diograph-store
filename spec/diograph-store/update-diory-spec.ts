@@ -8,7 +8,7 @@ describe("DiographStore .updateDiory()", () => {
     DiographStore.setAuthToken("df548369-d0a2-4ca5-b28a-dd4fb14c1f08")
   })
 
-  it("returns updated diory when success", (done) => {
+  it("updates diory with object", (done) => {
     let obj = {
       name: "Created diory"
     }
@@ -17,6 +17,21 @@ describe("DiographStore .updateDiory()", () => {
         expect(updatedDiory).toEqual(jasmine.any(Diory));
         expect(updatedDiory.name).toEqual("Updated diory")
         DiographApi.delete(diory.id).then(res => {
+          done();
+        })
+      })
+    });
+  });
+
+  it("updates diory with Diory model", (done) => {
+    let obj = {name: "Created diory", type: "place"}
+    DiographStore.createDiory(obj).then(diory => {
+      let id = diory.id.toString()
+      diory.name = "Updated diory"
+      DiographStore.updateDiory(id, diory).then(updatedDiory => {
+        expect(updatedDiory).toEqual(jasmine.any(Diory));
+        expect(updatedDiory.name).toEqual("Updated diory")
+        DiographApi.delete(id).then(res => {
           done();
         })
       })

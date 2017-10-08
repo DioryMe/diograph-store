@@ -119,6 +119,12 @@ export class DiographStore {
   // Private
 
   static convertResponseObjectToRequestObject(obj) {
+    delete obj["connectedDiories"]
+    delete obj["id"]
+    if (obj["type"]) {
+      obj["diory-type"] = obj["type"]
+      delete obj["type"]
+    }
     if (obj["geo"] != undefined) {
       obj["latitude"] = obj["geo"]["latitude"]
       obj["longitude"] = obj["geo"]["longitude"]
