@@ -125,6 +125,10 @@ export class DiographStore {
       obj["diory-type"] = obj["type"]
       delete obj["type"]
     }
+    if (obj["url"]) {
+      obj["address"] = obj["url"]
+      delete obj["url"]
+    }
     if (obj["geo"] != undefined) {
       obj["latitude"] = obj["geo"]["latitude"]
       obj["longitude"] = obj["geo"]["longitude"]
