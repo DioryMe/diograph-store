@@ -3,18 +3,18 @@
 ## Usage
 
 ```
-npm install diograph-store --save
+npm install diograph-store
 ```
 
-```
-import { DiographStore } from "diograph-store"
-```
+```typescript
+// example.ts
 
-```
+import { DiographStore } from "./app/diograph-store"
+
 DiographStore.setAuthToken("my-dev-token");
 
 try {
-  DiographStore.get("1234").then((diory) => {
+  DiographStore.getDiory("1234").then((diory) => {
     console.log(diory)
   })
 } catch(e) {
@@ -29,8 +29,14 @@ Diory {
   name: 'Test diory',
   url: 'http://google.com/',
   type: 'webpage',
-  background: null,
-  date: null }
+  background: undefined,
+  date: undefined,
+  geo: {
+    latitude: undefined,
+    longitude: undefined
+  },
+  connectedDiories = []
+}
 ```
 
 ## Compile
