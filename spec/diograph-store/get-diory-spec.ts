@@ -4,13 +4,13 @@ import { Diory } from "../../app/models/diory"
 describe("DiographStore .get()", () => {
 
   beforeEach(() => {
-    DiographStore.setAuthToken("test-token")
+    DiographStore.setAuthToken("df548369-d0a2-4ca5-b28a-dd4fb14c1f08")
   })
 
   it("returns Diory when success", (done) => {
-    DiographStore.getDiory("5691").then(diory => {
+    DiographStore.getDiory("1").then(diory => {
       expect(diory).toEqual(jasmine.any(Diory));
-      expect(diory.id).toBe("5691");
+      expect(diory.id).toBe("1");
       done();
     });
   });

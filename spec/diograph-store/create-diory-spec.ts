@@ -1,10 +1,11 @@
+import { DiographApi } from "../../app/lib/diograph-api"
 import { DiographStore } from "../../app/diograph-store"
 import { Diory } from "../../app/models/diory"
 
 describe("DiographStore .createDiory()", () => {
 
   beforeEach(() => {
-    DiographStore.setAuthToken("test-token")
+    DiographStore.setAuthToken("df548369-d0a2-4ca5-b28a-dd4fb14c1f08")
   })
 
   it("returns Diory when success", (done) => {
@@ -14,7 +15,9 @@ describe("DiographStore .createDiory()", () => {
     DiographStore.createDiory(obj).then(diory => {
       expect(diory).toEqual(jasmine.any(Diory));
       expect(diory.name).toBe(obj.name);
-      done();
+      DiographApi.delete(diory.id).then(res => {
+        done();
+      })
     });
   });
 

@@ -5,10 +5,16 @@ describe("Diograph API .update()", () => {
    var dioryId;
 
   beforeEach((done) => {
-    DiographApi.authToken = "test-token"
+    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
     DiographApi.create({"name": "Old name"}).then((res) => {
       dioryId = res.data.id
       done()
+    })
+  })
+
+  afterEach((done) => {
+    DiographApi.delete(dioryId).then(res => {
+      done();
     })
   })
 
