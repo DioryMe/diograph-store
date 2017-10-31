@@ -1,6 +1,6 @@
 {
   "name": "diograph-store",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "",
   "main": "lib/diograph-store.js",
   "scripts": {
