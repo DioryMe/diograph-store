@@ -54,7 +54,18 @@ export class DiographStore {
 
   static createDiory(obj): Promise<Diory> {
     if (!(obj instanceof Object)) { throw "Data given for DiographStore.createDiory() wasn't an object"}
-    return DiographApi.create(obj).then(response => {
+    let requestObj = this.convertResponseObjectToRequestObject(obj)
+    return DiographApi.create(requestObj).then(response => {
+      this.datastore.sync(response)
+      return new Diory(this.datastore.find("diories", response.data.id))
+    })
+  }
+
+  static updateDiory(id, obj): Promise<Diory> {
+    if (id === undefined) { throw "No id was given for DiographStore.updateDiory()" }
+    if (!(obj instanceof Object)) { throw "Data given for DiographStore.updateDiory() wasn't an object"}
+    let requestObj = this.convertResponseObjectToRequestObject(obj)
+    return DiographApi.update(id, requestObj).then(response => {
       this.datastore.sync(response)
       return new Diory(this.datastore.find("diories", response.data.id))
     })
@@ -103,6 +114,27 @@ export class DiographStore {
         return connectionObject;
       })
     })
+  }
+
+  // Private
+
+  static convertResponseObjectToRequestObject(obj) {
+    delete obj["connectedDiories"]
+    delete obj["id"]
+    if (obj["type"]) {
+      obj["diory-type"] = obj["type"]
+      delete obj["type"]
+    }
+    if (obj["url"]) {
+      obj["address"] = obj["url"]
+      delete obj["url"]
+    }
+    if (obj["geo"] != undefined) {
+      obj["latitude"] = obj["geo"]["latitude"]
+      obj["longitude"] = obj["geo"]["longitude"]
+      delete obj["geo"]
+    }
+    return obj
   }
 
 }
