@@ -71,6 +71,18 @@ export class DiographStore {
     })
   }
 
+  static deleteDiory(id): Promise<any> {
+    return new Promise(() => { return "jee"})
+  }
+
+  static deleteConnection(fromDioryId, toDioryId): Promise<any> {
+    return new Promise(() => { return "jee"})
+  }
+
+  static deleteStrongConnection(fromDioryId, toDioryId): Promise<any> {
+    return new Promise(() => { return "jee"})
+  }
+
   static connectDiories(fromDioryId, toDioryId): Promise<ConnectionObject> {
     if (fromDioryId === undefined || toDioryId === undefined) { throw "DiographStore.connectDiories() requires two parameters" }
     let fromDiory, toDiory

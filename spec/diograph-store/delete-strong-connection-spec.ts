@@ -27,7 +27,7 @@ describe("DiographStore .deleteStrongConnection()", () => {
     expect(fromDiory.connectedDiories.length).toEqual(1)
     expect(toDiory.connectedDiories.length).toEqual(1)
 
-    DiographStore.deleteStrongConnection(fromDiory, toDiory).then(deleteObject => {
+    DiographStore.deleteStrongConnection(fromDiory.id, toDiory.id).then(deleteObject => {
       expect(deleteObject.fromDiory).toEqual(jasmine.any(Diory));
       expect(deleteObject.toDiory).toEqual(jasmine.any(Diory));
       expect(deleteObject.connection).toEqual(null);
@@ -45,21 +45,9 @@ describe("DiographStore .deleteStrongConnection()", () => {
     });
   });
 
-  it("throws an error if first parameter is something else than an object", (done) => {
-    try {
-      DiographStore.deleteStrongConnection("this should be an {}", {}).then(() => {
-        done.fail("No error was raised");
-      })
-    }
-    catch(err) {
-      expect(err).toBe("Data given for DiographStore.deleteStrongConnection() wasn't an object");
-      done();
-    }
-  })
-
   it("throws an error if less than two parameters are given", (done) => {
     try {
-      DiographStore.deleteStrongConnection({}, undefined).then(() => {
+      DiographStore.deleteStrongConnection(123, undefined).then(() => {
         done.fail("No error was raised");
       })
     }
