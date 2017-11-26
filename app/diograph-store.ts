@@ -72,7 +72,9 @@ export class DiographStore {
   }
 
   static deleteDiory(id): Promise<any> {
-    return new Promise(() => { return "jee"})
+    return DiographApi.delete(id).then(response => {
+      return null
+    })
   }
 
   static deleteConnection(fromDioryId, toDioryId): Promise<any> {

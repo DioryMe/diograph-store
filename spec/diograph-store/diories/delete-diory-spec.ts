@@ -1,10 +1,6 @@
 import { DiographApi } from "../../../app/lib/diograph-api"
 import { DiographStore } from "../../../app/diograph-store"
 import { Diory } from "../../../app/models/diory"
-import { Connection } from "../../../app/models/connection"
-
-// Promise.all() requires this to work
-declare var Promise: any;
 
 describe("DiographStore .deleteDiory()", () => {
   let diory
@@ -19,21 +15,10 @@ describe("DiographStore .deleteDiory()", () => {
   })
 
   it("returns Diory when success", (done) => {
-    DiographStore.deleteDiory(diory).then(deletedDiory => {
+    DiographStore.deleteDiory(diory.id).then(deletedDiory => {
       expect(deletedDiory).toBe(null);
+      done()
     });
   });
-
-  it("throws an error if first parameter is something else than an object", (done) => {
-    try {
-      DiographStore.deleteDiory("this should be an {}").then(() => {
-        done.fail("No error was raised");
-      })
-    }
-    catch(err) {
-      expect(err).toBe("Data given for DiographStore.deleteDiory() wasn't an object");
-      done();
-    }
-  })
 
 });
