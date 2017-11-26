@@ -27,7 +27,7 @@ describe("DiographStore .deleteStrongConnection()", () => {
     expect(fromDiory.connectedDiories.length).toEqual(1)
     expect(toDiory.connectedDiories.length).toEqual(1)
 
-    DiographStore.deleteStrongConnection(fromDiory.id, toDiory.id).then(deleteObject => {
+    DiographStore.deleteStrongConnection(fromDiory, toDiory).then(deleteObject => {
       expect(deleteObject.fromDiory).toEqual(jasmine.any(Diory));
       expect(deleteObject.toDiory).toEqual(jasmine.any(Diory));
       expect(deleteObject.connection).toEqual(null);
