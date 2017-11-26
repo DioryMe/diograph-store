@@ -23,7 +23,9 @@ describe("DiographStore .connectDiories()", () => {
       expect(connectionObject.connection).toEqual(jasmine.any(Connection));
       expect(connectionObject.connection.fromDioryId + '').toBe(diory1.id);
       expect(connectionObject.connection.toDioryId + '').toBe(diory2.id);
-      done();
+      DiographApi.delete(connectionObject.connection.id, "connections").then(res => {
+        done();
+      })
     });
   });
 

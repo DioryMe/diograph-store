@@ -24,9 +24,9 @@ describe("Diograph API .get()", () => {
   })
 
   it("returns a connection if type is connections", (done) => {
-    DiographApi.get("1", "connections").then(res => {
+    DiographApi.get("5", "connections").then(res => {
       expect(res.data.type).toEqual("connections");
-      expect(res.data.id).toEqual("1");
+      expect(res.data.id).toEqual("5");
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
