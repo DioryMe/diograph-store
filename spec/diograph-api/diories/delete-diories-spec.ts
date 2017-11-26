@@ -14,7 +14,7 @@ describe("Diograph API .delete()", () => {
 
   it("deletes a 'New diory'", (done) => {
     DiographApi.delete(dioryId).then(res => {
-      expect(res).toBe(204)
+      expect(res).toEqual({})
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })

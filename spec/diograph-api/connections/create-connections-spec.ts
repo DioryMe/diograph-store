@@ -20,9 +20,9 @@ describe("Diograph API .create('connection')", () => {
       expect(res.data.type).toEqual("connections");
       expect(res.data.attributes["from-diory-id"]).toEqual(parseInt(diory1.id));
       expect(res.data.attributes["to-diory-id"]).toEqual(parseInt(diory2.id));
-      // DiographApi.delete(res.data.id, "connections").then(res => {
+      DiographApi.delete(res.data.id, "connections").then(res => {
         done();
-      // })
+      })
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 

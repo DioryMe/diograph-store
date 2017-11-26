@@ -15,8 +15,8 @@ export class DiographApi {
   }
 
   // private static baseUrl = "http://diory-server.herokuapp.com/v1/";
-  // private static baseUrl = "http://localhost:3000/v1/";
-  private static baseUrl = localStorage.getItem("endpoint")
+  private static baseUrl = "http://localhost:3000/v1/";
+  // private static baseUrl = localStorage.getItem("endpoint")
 
   static get(id, type="diories") {
     if (type !== "diories" && type !== "connections") { throw "Invalid type for DiographApi.get()" }
@@ -101,7 +101,7 @@ export class DiographApi {
       .set("Authorization", this.getAuthToken())
 
     return promise.then((res, err) => {
-      return res
+      return res.body
     }, err => { throw err })
   }
 

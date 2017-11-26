@@ -18,9 +18,9 @@ describe("Diograph API .delete('connection')", () => {
     })
   })
 
-  fit("delete new connection", (done) => {
+  it("delete new connection", (done) => {
     DiographApi.delete(connectionId, "connections").then(deleteRes => {
-      expect(deleteRes.status).toEqual(204)
+      expect(deleteRes).toEqual({})
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
