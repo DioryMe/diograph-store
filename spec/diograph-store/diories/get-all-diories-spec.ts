@@ -1,7 +1,7 @@
-import { DiographStore } from "../../app/diograph-store"
-import { DiographApi } from "../../app/lib/diograph-api"
-import { Diory } from "../../app/models/diory"
-import * as ErrorHandler from "../../app/lib/error-handler"
+import { DiographStore } from "../../../app/diograph-store"
+import { DiographApi } from "../../../app/lib/diograph-api"
+import { Diory } from "../../../app/models/diory"
+import * as ErrorHandler from "../../../app/lib/error-handler"
 
 // Promise.all() requires this to work
 declare var Promise: any;

@@ -1,6 +1,6 @@
-import { DiographApi } from "../../app/lib/diograph-api"
-import { DiographStore } from "../../app/diograph-store"
-import { Diory } from "../../app/models/diory"
+import { DiographApi } from "../../../app/lib/diograph-api"
+import { DiographStore } from "../../../app/diograph-store"
+import { Diory } from "../../../app/models/diory"
 
 describe("DiographStore .createDiory()", () => {
 

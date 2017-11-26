@@ -1,5 +1,5 @@
-import { DiographStore } from "../../app/diograph-store"
-import { Diory } from "../../app/models/diory"
+import { DiographStore } from "../../../app/diograph-store"
+import { Diory } from "../../../app/models/diory"
 
 describe("DiographStore .get()", () => {
 
