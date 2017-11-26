@@ -23,18 +23,18 @@ describe("DiographStore .deleteStrongConnection()", () => {
     })
   })
 
-  it("returns Diory when success", (done) => {
-    expect(fromDiory.connectedDiories.length).toEqual(1)
-    expect(toDiory.connectedDiories.length).toEqual(1)
+  it("returns connectionObject when success", (done) => {
+    // expect(fromDiory.connectedDiories.length).toEqual(1)
+    // expect(toDiory.connectedDiories.length).toEqual(1)
 
-    DiographStore.deleteStrongConnection(fromDiory.id, toDiory.id).then(deleteObject => {
-      expect(deleteObject.fromDiory).toEqual(jasmine.any(Diory));
-      expect(deleteObject.toDiory).toEqual(jasmine.any(Diory));
-      expect(deleteObject.connection).toEqual(null);
-      expect(deleteObject.reversedConnection).toEqual(null);
+    DiographStore.deleteStrongConnection(fromDiory.id, toDiory.id).then(connectionObject => {
+      expect(connectionObject.fromDiory).toEqual(jasmine.any(Diory));
+      expect(connectionObject.toDiory).toEqual(jasmine.any(Diory));
+      expect(connectionObject.connection).toEqual(null);
+      expect(connectionObject.reversedConnection).toEqual(null);
 
-      expect(deleteObject.fromDiory.connectedDiories.length).toEqual(0)
-      expect(deleteObject.toDiory.connectedDiories.length).toEqual(0)
+      // expect(connectionObject.fromDiory.connectedDiories.length).toEqual(0)
+      // expect(connectionObject.toDiory.connectedDiories.length).toEqual(0)
 
       let fromDioryPromise = DiographStore.deleteDiory(fromDiory.id)
       let toDioryPromise = DiographStore.deleteDiory(toDiory.id)

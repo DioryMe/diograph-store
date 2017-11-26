@@ -77,12 +77,27 @@ export class DiographStore {
     })
   }
 
-  static deleteConnection(fromDioryId, toDioryId): Promise<any> {
-    return new Promise(() => { return "jee"})
+  // WARNING: This is not implemented yet (just pseudo code)
+  static getConnection(fromDioryId, toDioryId): Promise<any> {
+    return DiographApi.get([fromDioryId, toDioryId], "connections").then((connection) => {
+      return connection
+    })
   }
 
+  // WARNING: This is not implemented yet (just pseudo code)
+  static deleteConnection(fromDioryId, toDioryId): Promise<any> {
+    return this.getConnection(fromDioryId, toDioryId).then((connection) => {
+      return DiographApi.delete(connection.id, "connections").then(response => {
+        return null
+      })
+    })
+  }
+
+  // WARNING: This is not implemented yet (just pseudo code)
   static deleteStrongConnection(fromDioryId, toDioryId): Promise<any> {
-    return new Promise(() => { return "jee"})
+    let fromToPromise = this.deleteConnection(fromDioryId, toDioryId)
+    let toFromPromise = this.deleteConnection(toDioryId, fromDioryId)
+    return Promise.all([fromToPromise, toFromPromise])
   }
 
   static connectDiories(fromDioryId, toDioryId): Promise<ConnectionObject> {

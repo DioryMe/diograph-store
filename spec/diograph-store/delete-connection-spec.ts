@@ -23,18 +23,18 @@ describe("DiographStore .deleteConnection()", () => {
     })
   })
 
-  it("returns Diory when success", (done) => {
+  it("returns connectionObject when success", (done) => {
     // expect(fromDiory.connectedDiories.length).toEqual(1)
     // expect(toDiory.connectedDiories.length).toEqual(0)
 
-    DiographStore.deleteConnection(fromDiory, toDiory).then(deleteObject => {
-      expect(deleteObject.fromDiory).toEqual(jasmine.any(Diory));
-      expect(deleteObject.toDiory).toEqual(jasmine.any(Diory));
-      expect(deleteObject.connection).toEqual(null);
-      expect(deleteObject.reversedConnection).toEqual(null);
+    DiographStore.deleteConnection(fromDiory, toDiory).then(connectionObject => {
+      expect(connectionObject.fromDiory).toEqual(jasmine.any(Diory));
+      expect(connectionObject.toDiory).toEqual(jasmine.any(Diory));
+      expect(connectionObject.connection).toEqual(null);
+      expect(connectionObject.reversedConnection).toEqual(null);
 
-      // expect(deleteObject.fromDiory.connectedDiories.length).toEqual(0)
-      // expect(deleteObject.toDiory.connectedDiories.length).toEqual(0)
+      // expect(connectionObject.fromDiory.connectedDiories.length).toEqual(0)
+      // expect(connectionObject.toDiory.connectedDiories.length).toEqual(0)
 
       let fromDioryPromise = DiographStore.deleteDiory(fromDiory.id)
       let toDioryPromise = DiographStore.deleteDiory(toDiory.id)
@@ -45,21 +45,9 @@ describe("DiographStore .deleteConnection()", () => {
     });
   });
 
-  it("throws an error if first parameter is something else than an object", (done) => {
-    try {
-      DiographStore.deleteConnection("this should be an {}", {}).then(() => {
-        done.fail("No error was raised");
-      })
-    }
-    catch(err) {
-      expect(err).toBe("Data given for DiographStore.deleteConnection() wasn't an object");
-      done();
-    }
-  })
-
   it("throws an error if less than two parameters are given", (done) => {
     try {
-      DiographStore.deleteConnection({}, undefined).then(() => {
+      DiographStore.deleteConnection(123, undefined).then(() => {
         done.fail("No error was raised");
       })
     }
