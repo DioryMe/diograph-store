@@ -7,10 +7,11 @@ describe("Diograph API .get('connections')", () => {
     DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
   })
 
-  it("returns a connection", (done) => {
-    DiographApi.get(["1", "2"], "connections").then(res => {
-      expect(res.data.type).toEqual("connections");
-      expect(res.data.id).toEqual("1");
+  fit("returns a connection", (done) => {
+    DiographApi.get(["5", "6"], "connections").then(res => {
+      console.log(res)
+      expect(res.data[0].type).toEqual("connections");
+      expect(res.data[0].id).toEqual("5");
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
