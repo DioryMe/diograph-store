@@ -23,7 +23,7 @@ describe("DiographStore .deleteConnection()", () => {
     })
   })
 
-  it("returns connectionObject when success", (done) => {
+  it("returns null when success", (done) => {
     DiographStore.deleteConnection(fromDiory.id, toDiory.id).then(res => {
       expect(res).toEqual(null)
 

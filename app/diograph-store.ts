@@ -94,11 +94,13 @@ export class DiographStore {
     })
   }
 
-  // WARNING: This is not implemented yet (just pseudo code)
   static deleteStrongConnection(fromDioryId, toDioryId): Promise<any> {
+    if (fromDioryId === undefined || toDioryId === undefined) { throw "Required two ids not given to DiographStore.deleteStrongConnection()" }
     let fromToPromise = this.deleteConnection(fromDioryId, toDioryId)
     let toFromPromise = this.deleteConnection(toDioryId, fromDioryId)
-    return Promise.all([fromToPromise, toFromPromise])
+    return Promise.all([fromToPromise, toFromPromise]).then(() => {
+      return null
+    })
   }
 
   static connectDiories(fromDioryId, toDioryId): Promise<ConnectionObject> {
