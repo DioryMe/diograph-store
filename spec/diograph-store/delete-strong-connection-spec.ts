@@ -23,7 +23,7 @@ describe("DiographStore .deleteStrongConnection()", () => {
     })
   })
 
-  it("returns connectionObject when success", (done) => {
+  xit("returns connectionObject when success", (done) => {
     // expect(fromDiory.connectedDiories.length).toEqual(1)
     // expect(toDiory.connectedDiories.length).toEqual(1)
 
@@ -45,7 +45,7 @@ describe("DiographStore .deleteStrongConnection()", () => {
     });
   });
 
-  it("throws an error if less than two parameters are given", (done) => {
+  xit("throws an error if less than two parameters are given", (done) => {
     try {
       DiographStore.deleteStrongConnection(123, undefined).then(() => {
         done.fail("No error was raised");
