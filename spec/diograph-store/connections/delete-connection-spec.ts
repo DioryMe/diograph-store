@@ -1,12 +1,12 @@
-import { DiographApi } from "../../app/lib/diograph-api"
-import { DiographStore } from "../../app/diograph-store"
-import { Diory } from "../../app/models/diory"
-import { Connection } from "../../app/models/connection"
+import { DiographApi } from "../../../app/lib/diograph-api"
+import { DiographStore } from "../../../app/diograph-store"
+import { Diory } from "../../../app/models/diory"
+import { Connection } from "../../../app/models/connection"
 
 // Promise.all() requires this to work
 declare var Promise: any;
 
-describe("DiographStore .deleteStrongConnection()", () => {
+describe("DiographStore .deleteConnection()", () => {
   let fromDiory, toDiory, connection
 
   beforeEach(done => {
@@ -14,8 +14,8 @@ describe("DiographStore .deleteStrongConnection()", () => {
     let fromDioryObj = { name: "FromDiory" }
     let toDioryObj = { name: "ToDiory" }
     DiographStore.createDiory(fromDioryObj).then((diory) => {
-      fromDiory = diory
-      DiographStore.createAndConnectDioryStrongly(toDioryObj, diory.id).then((connectionObject) => {
+      DiographStore.createAndConnectDiory(toDioryObj, diory.id).then((connectionObject) => {
+        fromDiory = connectionObject.fromDiory
         toDiory = connectionObject.toDiory
         connection = connectionObject.connection
         done()
@@ -33,20 +33,20 @@ describe("DiographStore .deleteStrongConnection()", () => {
   })
 
   it("returns null when success", (done) => {
-    DiographStore.deleteStrongConnection(fromDiory.id, toDiory.id).then(response => {
-      expect(response).toEqual(null)
+    DiographStore.deleteConnection(fromDiory.id, toDiory.id).then(res => {
+      expect(res).toEqual(null)
       done()
     });
   });
 
   it("throws an error if less than two parameters are given", (done) => {
     try {
-      DiographStore.deleteStrongConnection(123, undefined).then(() => {
+      DiographStore.deleteConnection(123, undefined).then(() => {
         done.fail("No error was raised");
       })
     }
     catch(err) {
-      expect(err).toBe("Required two ids not given to DiographStore.deleteStrongConnection()");
+      expect(err).toBe("Required two ids not given to DiographStore.deleteConnection()");
       done();
     }
   })

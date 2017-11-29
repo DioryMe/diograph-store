@@ -22,7 +22,13 @@ export class DiographApi {
     if (type !== "diories" && type !== "connections") { throw "Invalid type for DiographApi.get()" }
     if (id === undefined) { throw "No id was given for DiographApi.get()" }
     let endpoint = this.baseUrl + type + "/" + id
-    return this.getFromEndpoint(endpoint)
+    let query = {}
+    if (type == "connections") {
+      if (!(id instanceof Array)) { throw "Id should be an array in DiographApi.get('connections')" }
+      endpoint = this.baseUrl + type + "/"
+      query = { filter: { "from-diory-id": id[0], "to-diory-id": id[1]}}
+    }
+    return this.getFromEndpoint(endpoint, query)
   }
 
   static getAll(type=undefined) {
