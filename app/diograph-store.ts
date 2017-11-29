@@ -79,8 +79,9 @@ export class DiographStore {
 
   // WARNING: This is not implemented yet (just pseudo code)
   static getConnection(fromDioryId, toDioryId): Promise<any> {
-    return DiographApi.get([fromDioryId, toDioryId], "connections").then((connection) => {
-      return connection
+    return DiographApi.get([fromDioryId, toDioryId], "connections").then(response => {
+      this.datastore.sync(response)
+      return new Connection(this.datastore.find("connections", response.data[0].id))
     })
   }
 

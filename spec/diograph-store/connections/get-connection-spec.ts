@@ -9,9 +9,9 @@ describe("DiographStore .get('connections')", () => {
   })
 
   it("returns Connection when success", (done) => {
-    DiographStore.getConnection("1", "2").then(connection => {
+    DiographStore.getConnection("5", "6").then(connection => {
       expect(connection).toEqual(jasmine.any(Connection));
-      expect(connection.id).toBe("1");
+      expect(connection.id).toBe("5");
       done();
     });
   });
