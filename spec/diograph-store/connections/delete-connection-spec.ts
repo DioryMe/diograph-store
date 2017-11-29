@@ -23,36 +23,27 @@ describe("DiographStore .deleteConnection()", () => {
     })
   })
 
-  xit("returns connectionObject when success", (done) => {
-    // expect(fromDiory.connectedDiories.length).toEqual(1)
-    // expect(toDiory.connectedDiories.length).toEqual(0)
+  it("returns connectionObject when success", (done) => {
+    DiographStore.deleteConnection(fromDiory.id, toDiory.id).then(res => {
+      expect(res).toEqual(null)
 
-    DiographStore.deleteConnection(fromDiory, toDiory).then(connectionObject => {
-      expect(connectionObject.fromDiory).toEqual(jasmine.any(Diory));
-      expect(connectionObject.toDiory).toEqual(jasmine.any(Diory));
-      expect(connectionObject.connection).toEqual(null);
-      expect(connectionObject.reversedConnection).toEqual(null);
-
-      // expect(connectionObject.fromDiory.connectedDiories.length).toEqual(0)
-      // expect(connectionObject.toDiory.connectedDiories.length).toEqual(0)
-
+      // Clean up the created diories
       let fromDioryPromise = DiographStore.deleteDiory(fromDiory.id)
       let toDioryPromise = DiographStore.deleteDiory(toDiory.id)
-
       Promise.all([fromDioryPromise, toDioryPromise]).then(() => {
         done();
       })
     });
   });
 
-  xit("throws an error if less than two parameters are given", (done) => {
+  it("throws an error if less than two parameters are given", (done) => {
     try {
       DiographStore.deleteConnection(123, undefined).then(() => {
         done.fail("No error was raised");
       })
     }
     catch(err) {
-      expect(err).toBe("DiographStore.deleteConnection() requires two parameters");
+      expect(err).toBe("Required two ids not given to DiographStore.deleteConnection()");
       done();
     }
   })
