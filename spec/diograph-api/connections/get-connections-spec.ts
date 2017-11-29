@@ -22,7 +22,7 @@ describe("Diograph API .get('connections')", () => {
       })
     }
     catch(err) {
-      expect(err).toBe("Id should be an array when type is connections on DiographApi.get()");
+      expect(err).toBe("Id should be an array in DiographApi.get('connections')");
       done();
     }
   })
