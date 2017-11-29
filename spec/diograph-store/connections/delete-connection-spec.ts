@@ -9,7 +9,7 @@ declare var Promise: any;
 describe("DiographStore .deleteConnection()", () => {
   let fromDiory, toDiory, connection
 
-  beforeEach((done) => {
+  beforeEach(done => {
     DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
     let fromDioryObj = { name: "FromDiory" }
     let toDioryObj = { name: "ToDiory" }
@@ -23,16 +23,19 @@ describe("DiographStore .deleteConnection()", () => {
     })
   })
 
+  afterEach(done => {
+    // Clean up the created diories
+    let fromDioryPromise = DiographStore.deleteDiory(fromDiory.id)
+    let toDioryPromise = DiographStore.deleteDiory(toDiory.id)
+    Promise.all([fromDioryPromise, toDioryPromise]).then(() => {
+      done();
+    })
+  })
+
   it("returns null when success", (done) => {
     DiographStore.deleteConnection(fromDiory.id, toDiory.id).then(res => {
       expect(res).toEqual(null)
-
-      // Clean up the created diories
-      let fromDioryPromise = DiographStore.deleteDiory(fromDiory.id)
-      let toDioryPromise = DiographStore.deleteDiory(toDiory.id)
-      Promise.all([fromDioryPromise, toDioryPromise]).then(() => {
-        done();
-      })
+      done()
     });
   });
 
