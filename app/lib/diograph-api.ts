@@ -24,6 +24,7 @@ export class DiographApi {
     let endpoint = this.baseUrl + type + "/"
     let query = {}
     if (type == "connections") {
+      if (!(id instanceof Array)) { throw "Id should be an array when type is connections on DiographApi.get()" }
       query = { filter: { "from-diory-id": id[0], "to-diory-id": id[1]}}
     }
     return this.getFromEndpoint(endpoint, query)
