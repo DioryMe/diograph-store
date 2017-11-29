@@ -77,8 +77,8 @@ export class DiographStore {
     })
   }
 
-  // WARNING: This is not implemented yet (just pseudo code)
   static getConnection(fromDioryId, toDioryId): Promise<any> {
+    if (fromDioryId === undefined || toDioryId === undefined) { throw "Required two ids not given to DiographStore.getConnection()" }
     return DiographApi.get([fromDioryId, toDioryId], "connections").then(response => {
       this.datastore.sync(response)
       return new Connection(this.datastore.find("connections", response.data[0].id))

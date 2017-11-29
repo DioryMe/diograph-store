@@ -16,4 +16,16 @@ describe("DiographStore .get('connections')", () => {
     });
   });
 
+  it("throws an error if no two ids is given", (done) => {
+    try {
+      DiographStore.getConnection("1", undefined).then(() => {
+        done.fail("No error was raised");
+      })
+    }
+    catch(err) {
+      expect(err).toBe("Required two ids not given to DiographStore.getConnection()");
+      done();
+    }
+  })
+
 });
