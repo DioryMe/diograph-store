@@ -15,6 +15,13 @@ describe("Diograph API .get('connections')", () => {
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
+  it("returns empty array if connection with the given ids is not found", (done) => {
+    DiographApi.get(["5", "99999999"], "connections").then((res) => {
+      expect(res.data).toEqual([])
+      done();
+    }, (e) => { ErrorHandler.logAndFailTest(e); done();})
+  })
+
   it("throws an error if id is not an array", (done) => {
     try {
       DiographApi.get("1234", "connections").then(() => {
