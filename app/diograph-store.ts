@@ -73,6 +73,8 @@ export class DiographStore {
 
   static deleteDiory(id): Promise<any> {
     return DiographApi.delete(id).then(response => {
+      let dioryDatastoreModel = this.datastore.find("diories", id)
+      this.datastore.destroy(dioryDatastoreModel)
       return null
     })
   }
