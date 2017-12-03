@@ -21,7 +21,7 @@ describe("DiographStore .deleteDiory()", () => {
     });
   });
 
-  it("removes delete diory from jsonapi-datastore => getAllDiories returns correct value", (done) => {
+  it("removes deleted diory from jsonapi-datastore => getAllDiories returns correct value", (done) => {
     DiographStore.getAllDiories().then(initialAllDiories => {
       let initialAllDioriesCount = initialAllDiories.length
       DiographStore.deleteDiory(diory.id).then(res => {

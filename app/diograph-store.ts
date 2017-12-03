@@ -91,6 +91,8 @@ export class DiographStore {
     if (fromDioryId === undefined || toDioryId === undefined) { throw "Required two ids not given to DiographStore.deleteConnection()" }
     return this.getConnection(fromDioryId, toDioryId).then(connection => {
       return DiographApi.delete(connection.id, "connections").then(response => {
+        // let connectionDatastoreModel = this.datastore.find("connections", connection.id)
+        // this.datastore.destroy(connectionDatastoreModel)
         return null
       })
     })
