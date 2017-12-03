@@ -16,7 +16,7 @@ describe("DiographStore .get('connections')", () => {
     });
   });
 
-  fit("returns null when not found", (done) => {
+  it("returns null when not found", (done) => {
     DiographStore.getConnection("123", "345").then(connection => {
       expect(connection).toBe(null);
       done();

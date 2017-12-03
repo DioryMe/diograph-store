@@ -42,7 +42,7 @@ describe("DiographStore .deleteConnection()", () => {
   it("removes deleted connection from jsonapi-datastore => getConnection doesn't find it anymore", (done) => {
     DiographStore.deleteConnection(fromDiory.id, toDiory.id).then(res => {
       DiographStore.getConnection(fromDiory.id, toDiory.id).then(connection => {
-        expect(connection).toEqual("123")
+        expect(connection).toEqual(null)
         done()
       })
     });
