@@ -83,7 +83,11 @@ export class DiographStore {
     if (fromDioryId === undefined || toDioryId === undefined) { throw "Required two ids not given to DiographStore.getConnection()" }
     return DiographApi.get([fromDioryId, toDioryId], "connections").then(response => {
       this.datastore.sync(response)
-      return new Connection(this.datastore.find("connections", response.data[0].id))
+      if (response.data == []) {
+        return new Connection(this.datastore.find("connections", response.data[0].id))
+      } else {
+        return null
+      }
     })
   }
 

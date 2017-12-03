@@ -16,6 +16,13 @@ describe("DiographStore .get('connections')", () => {
     });
   });
 
+  fit("returns null when not found", (done) => {
+    DiographStore.getConnection("123", "345").then(connection => {
+      expect(connection).toBe(null);
+      done();
+    });
+  });
+
   it("throws an error if no two ids is given", (done) => {
     try {
       DiographStore.getConnection("1", undefined).then(() => {
