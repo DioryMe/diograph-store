@@ -30,7 +30,7 @@ export class DiographStore {
     if (id === undefined) { throw "No id was given for DiographStore.getDiory()" }
     return DiographApi.get(id).then(response => {
       this.datastore.sync(response)
-      return new Diory(this.datastore.find("diories", id))
+      return new Diory(this.datastore.find("diories", response.data.id))
     })
   }
 
