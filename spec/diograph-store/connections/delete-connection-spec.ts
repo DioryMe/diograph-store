@@ -39,6 +39,15 @@ describe("DiographStore .deleteConnection()", () => {
     });
   });
 
+  it("removes deleted connection from jsonapi-datastore => getConnection doesn't find it anymore", (done) => {
+    DiographStore.deleteConnection(fromDiory.id, toDiory.id).then(res => {
+      DiographStore.getConnection(fromDiory.id, toDiory.id).then(connection => {
+        expect(connection).toEqual(null)
+        done()
+      })
+    });
+  });
+
   it("throws an error if less than two parameters are given", (done) => {
     try {
       DiographStore.deleteConnection(123, undefined).then(() => {

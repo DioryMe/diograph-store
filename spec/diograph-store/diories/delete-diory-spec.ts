@@ -21,4 +21,16 @@ describe("DiographStore .deleteDiory()", () => {
     });
   });
 
+  it("removes deleted diory from jsonapi-datastore => getAllDiories returns correct value", (done) => {
+    DiographStore.getAllDiories().then(initialAllDiories => {
+      let initialAllDioriesCount = initialAllDiories.length
+      DiographStore.deleteDiory(diory.id).then(res => {
+        DiographStore.getAllDiories().then(finalAllDiories => {
+          expect(finalAllDiories.length).toEqual(initialAllDioriesCount - 1)
+          done()
+        })
+      });
+    });
+  });
+
 });

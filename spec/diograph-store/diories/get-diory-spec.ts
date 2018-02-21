@@ -15,9 +15,9 @@ describe("DiographStore .get('diories')", () => {
     });
   });
 
-  it("returns 404 - Not found when error", (done) => {
-    DiographStore.getDiory("invalid id").catch(err => {
-      expect(err.response.body.errors[0].title).toBe("Diory not found");
+  it("returns null when not found", (done) => {
+    DiographStore.getDiory("invalid id").then(diory => {
+      expect(diory).toBe(null);
       done();
     });
   });

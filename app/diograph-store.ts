@@ -30,7 +30,11 @@ export class DiographStore {
     if (id === undefined) { throw "No id was given for DiographStore.getDiory()" }
     return DiographApi.get(id).then(response => {
       this.datastore.sync(response)
-      return new Diory(this.datastore.find("diories", id))
+      return new Diory(this.datastore.find("diories", response.data.id))
+    }).catch(err => {
+      if (err.status === 404) {
+        return null
+      }
     })
   }
 
@@ -73,6 +77,8 @@ export class DiographStore {
 
   static deleteDiory(id): Promise<any> {
     return DiographApi.delete(id).then(response => {
+      let dioryDatastoreModel = this.datastore.find("diories", id)
+      this.datastore.destroy(dioryDatastoreModel)
       return null
     })
   }
@@ -81,16 +87,26 @@ export class DiographStore {
     if (fromDioryId === undefined || toDioryId === undefined) { throw "Required two ids not given to DiographStore.getConnection()" }
     return DiographApi.get([fromDioryId, toDioryId], "connections").then(response => {
       this.datastore.sync(response)
-      return new Connection(this.datastore.find("connections", response.data[0].id))
+      if (response.data.length > 0) {
+        return new Connection(this.datastore.find("connections", response.data[0].id))
+      } else {
+        return null
+      }
     })
   }
 
   static deleteConnection(fromDioryId, toDioryId): Promise<any> {
     if (fromDioryId === undefined || toDioryId === undefined) { throw "Required two ids not given to DiographStore.deleteConnection()" }
     return this.getConnection(fromDioryId, toDioryId).then(connection => {
-      return DiographApi.delete(connection.id, "connections").then(response => {
+      if (connection === null) {
         return null
-      })
+      } else {
+        return DiographApi.delete(connection.id, "connections").then(response => {
+          // let connectionDatastoreModel = this.datastore.find("connections", connection.id)
+          // this.datastore.destroy(connectionDatastoreModel)
+          return null
+        })
+      }
     })
   }
 
