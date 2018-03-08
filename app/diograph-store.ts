@@ -4,6 +4,7 @@ import { Connection } from "./models/connection"
 import { DiographApi } from "./lib/diograph-api"
 
 import { EXIF } from 'exif-js'
+import * as request from "superagent"
 
 // Better error message for Unhandled Promise rejections
 process.on('unhandledRejection', function(reason, p) {
@@ -167,15 +168,32 @@ export class DiographStore {
   }
 
   static createDioryFromImageFile(file): Promise<Diory> {
-    let latitude, longitude
+    let background, date, latitude, longitude
+
+    // Background is the uploaded image's S3 url
+    // Get uploadUrl
+    background = DiographApi.getUploadUrl().then((uploadUrl) => {
+      // Upload the file to S3
+      return request.put(uploadUrl).send(file).then((imageUrl) => {
+        // Return S3 url
+        return imageUrl
+      })
+    })
+
+    // Date, latitude & longitude are extracted from EXIF
     // EXIF.getData(file, function() {
+    //   date = this.toGpsDecimal(EXIF.getTag(this, "DateTimeOriginal"));
     //   latitude = this.toGpsDecimal(EXIF.getTag(this, "GPSLatitude"));
     //   longitude = this.toGpsDecimal(EXIF.getTag(this, "GPSLongitude"));
     // });
+
     let dioryData = {
+      background: background,
+      date: date,
       latitude: latitude,
       longitude: longitude
     }
+
     return new Promise((resolve) => resolve(new Diory(dioryData, false)))
   }
 
