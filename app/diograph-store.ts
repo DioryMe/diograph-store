@@ -164,6 +164,10 @@ export class DiographStore {
     })
   }
 
+  static createDioryFromImageFile(): Promise<Diory> {
+    return new Promise((resolve) => resolve(new Diory({}, false)))
+  }
+
   // Private
 
   static convertResponseObjectToRequestObject(obj) {
