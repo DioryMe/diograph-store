@@ -170,31 +170,38 @@ export class DiographStore {
   static createDioryFromImageFile(file): Promise<Diory> {
     let background, date, latitude, longitude
 
-    // Background is the uploaded image's S3 url
-    // Get uploadUrl
-    background = DiographApi.getUploadUrl().then((uploadUrl) => {
-      // Upload the file to S3
-      return request.put(uploadUrl).send(file).then((imageUrl) => {
-        // Return S3 url
-        return imageUrl
+    // 1. Background is the uploaded image's S3 url
+    background =
+      // Get uploadUrl from diory-server
+      DiographApi.getUploadUrl().then((uploadUrl) => {
+        // Upload the file to S3 via PUT request to uploadUrl
+        return request.put(uploadUrl).send(file).then((imageUrl) => {
+          // Return S3 url
+          return imageUrl
+        })
       })
-    })
 
-    // Date, latitude & longitude are extracted from EXIF
-    // EXIF.getData(file, function() {
-    //   date = this.toGpsDecimal(EXIF.getTag(this, "DateTimeOriginal"));
-    //   latitude = this.toGpsDecimal(EXIF.getTag(this, "GPSLatitude"));
-    //   longitude = this.toGpsDecimal(EXIF.getTag(this, "GPSLongitude"));
-    // });
+    // 2. Date, latitude & longitude are extracted from EXIF
+    EXIF.getData(file, function() {
+      date = this.toGpsDecimal(EXIF.getTag(this, "DateTimeOriginal"));
+      latitude = this.toGpsDecimal(EXIF.getTag(this, "GPSLatitude"));
+      longitude = this.toGpsDecimal(EXIF.getTag(this, "GPSLongitude"));
+    });
 
+    // 3. Diory attributes are composed to dioryData
     let dioryData = {
+      name: file.name,
+      type: "image",
       background: background,
       date: date,
       latitude: latitude,
       longitude: longitude
     }
 
-    return new Promise((resolve) => resolve(new Diory(dioryData, false)))
+    // 4. Create diory and return it
+    return this.createDiory(dioryData).then(diory => {
+      return diory
+    })
   }
 
   static toDecimal(number) {
