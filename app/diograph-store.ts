@@ -3,6 +3,8 @@ import { Diory } from "./models/diory"
 import { Connection } from "./models/connection"
 import { DiographApi } from "./lib/diograph-api"
 
+import { EXIF } from 'exif-js'
+
 // Better error message for Unhandled Promise rejections
 process.on('unhandledRejection', function(reason, p) {
     console.log("Unhandled Rejection, reason: ", reason);
@@ -164,9 +166,23 @@ export class DiographStore {
     })
   }
 
-  static createDioryFromImageFile(): Promise<Diory> {
-    return new Promise((resolve) => resolve(new Diory({}, false)))
+  static createDioryFromImageFile(file): Promise<Diory> {
+    let latitude, longitude
+    // EXIF.getData(file, function() {
+    //   latitude = this.toGpsDecimal(EXIF.getTag(this, "GPSLatitude"));
+    //   longitude = this.toGpsDecimal(EXIF.getTag(this, "GPSLongitude"));
+    // });
+    let dioryData = {
+      latitude: latitude,
+      longitude: longitude
+    }
+    return new Promise((resolve) => resolve(new Diory(dioryData, false)))
   }
+
+  static toDecimal(number) {
+    return number[0].numerator + number[1].numerator /
+      (60 * number[1].denominator) + number[2].numerator / (3600 * number[2].denominator);
+  };
 
   // Private
 
