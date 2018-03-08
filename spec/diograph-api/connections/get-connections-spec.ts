@@ -8,15 +8,16 @@ describe("Diograph API .get('connections')", () => {
   })
 
   it("returns a connection", (done) => {
-    DiographApi.get(["5", "6"], "connections").then(res => {
+    // FIXME: Depends on having certain kind of data in database
+    DiographApi.get(["1", "651"], "connections").then(res => {
       expect(res.data[0].type).toEqual("connections");
-      expect(res.data[0].id).toEqual("5");
+      expect(res.data[0].id).toEqual("877");
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })
 
   it("returns empty array if connection with the given ids is not found", (done) => {
-    DiographApi.get(["5", "99999999"], "connections").then((res) => {
+    DiographApi.get(["1", "99999999"], "connections").then((res) => {
       expect(res.data).toEqual([])
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
