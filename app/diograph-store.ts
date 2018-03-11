@@ -174,13 +174,13 @@ export class DiographStore {
     // 1. Background is the uploaded image's S3 url
     let background =
       // Get uploadUrl from diory-server
-      await DiographApi.getUploadUrl().then((uploadUrl) => {
-        console.log(uploadUrl)
+      await DiographApi.getUploadUrls().then((uploadUrls) => {
+        console.log(uploadUrls["upload-url"])
         // Upload the file to S3 via PUT request to uploadUrl
-        return request.put(uploadUrl).send(file).then((imageUrl) => {
+        return request.put(uploadUrls["upload-url"]).send(file).then((response) => {
           // Return S3 url
-          console.log(imageUrl)
-          return imageUrl
+          console.log(uploadUrls["public-url"])
+          return uploadUrls["public-urls"]
         })
       })
 
