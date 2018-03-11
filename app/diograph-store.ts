@@ -168,7 +168,6 @@ export class DiographStore {
   }
 
   static async createDioryFromImageFile(event): Promise<Diory> {
-    console.log(event);
     var file = event.target.files[0];
     console.log(file);
 
@@ -187,6 +186,7 @@ export class DiographStore {
 
     // 2. Date, latitude & longitude are extracted from EXIF
     let exif = await this.extractEXIFData(file)
+    console.log(exif)
 
     // 3. Diory attributes are composed to dioryData
     let dioryData = {
