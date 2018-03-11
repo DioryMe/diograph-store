@@ -8,8 +8,9 @@ describe("Diograph API .getUploadUrl()", () => {
   })
 
   it("returns an url", (done) => {
-    DiographApi.getUploadUrl().then(res => {
-      expect(res.data).toBeTruthy();
+    DiographApi.getUploadUrl().then(url => {
+      expect(url).toEqual(jasmine.any(String));
+      expect(url).toMatch(/^http(s)?:\/\//);
       done();
     }, (e) => { ErrorHandler.logAndFailTest(e); done();})
   })

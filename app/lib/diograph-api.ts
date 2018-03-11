@@ -63,8 +63,8 @@ export class DiographApi {
   }
 
   static getUploadUrl() {
-    return this.getFromEndpoint("http://localhost:3000/v1/presigned-upload-url").then((uploadUrl) => {
-      return uploadUrl
+    return this.getFromEndpoint("http://localhost:3000/v1/presigned-upload-url").then((response) => {
+      return response.data
     })
   }
 
