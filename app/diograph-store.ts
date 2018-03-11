@@ -167,17 +167,15 @@ export class DiographStore {
     })
   }
 
-  static createDioryFromImageFile(event): Promise<Diory> {
+  static async createDioryFromImageFile(event): Promise<Diory> {
     console.log(event);
     var file = event.target.files[0];
     console.log(file);
 
-    let background, date, latitude, longitude
-
     // 1. Background is the uploaded image's S3 url
-    background =
+    let background =
       // Get uploadUrl from diory-server
-      DiographApi.getUploadUrl().then((uploadUrl) => {
+      await DiographApi.getUploadUrl().then((uploadUrl) => {
         console.log(uploadUrl)
         // Upload the file to S3 via PUT request to uploadUrl
         return request.put(uploadUrl).send(file).then((imageUrl) => {
@@ -188,20 +186,16 @@ export class DiographStore {
       })
 
     // 2. Date, latitude & longitude are extracted from EXIF
-    EXIF.getData(file, function() {
-      date = this.toGpsDecimal(EXIF.getTag(this, "DateTimeOriginal"));
-      latitude = this.toGpsDecimal(EXIF.getTag(this, "GPSLatitude"));
-      longitude = this.toGpsDecimal(EXIF.getTag(this, "GPSLongitude"));
-    });
+    let exif = await this.extractEXIFData(file)
 
     // 3. Diory attributes are composed to dioryData
     let dioryData = {
       name: file.name,
       type: "image",
       background: background,
-      date: date,
-      latitude: latitude,
-      longitude: longitude
+      date: exif["date"],
+      latitude: exif["latitude"],
+      longitude: exif["longitude"]
     }
 
     console.log(dioryData)
@@ -210,6 +204,17 @@ export class DiographStore {
     return this.createDiory(dioryData).then(diory => {
       return diory
     })
+  }
+
+  static async extractEXIFData(file) {
+    let exif = {}
+    return EXIF.getData(file, function() {
+      exif["date"] = this.toGpsDecimal(EXIF.getTag(this, "DateTimeOriginal"));
+      exif["latitude"] = this.toGpsDecimal(EXIF.getTag(this, "GPSLatitude"));
+      exif["longitude"] = this.toGpsDecimal(EXIF.getTag(this, "GPSLongitude"));
+      return exif
+    });
+
   }
 
   static toGpsDecimal(number) {
