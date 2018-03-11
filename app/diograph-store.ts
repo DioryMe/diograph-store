@@ -167,16 +167,22 @@ export class DiographStore {
     })
   }
 
-  static createDioryFromImageFile(file): Promise<Diory> {
+  static createDioryFromImageFile(event): Promise<Diory> {
+    console.log(event);
+    var file = event.target.files[0];
+    console.log(file);
+
     let background, date, latitude, longitude
 
     // 1. Background is the uploaded image's S3 url
     background =
       // Get uploadUrl from diory-server
       DiographApi.getUploadUrl().then((uploadUrl) => {
+        console.log(uploadUrl)
         // Upload the file to S3 via PUT request to uploadUrl
         return request.put(uploadUrl).send(file).then((imageUrl) => {
           // Return S3 url
+          console.log(imageUrl)
           return imageUrl
         })
       })
@@ -198,13 +204,15 @@ export class DiographStore {
       longitude: longitude
     }
 
+    console.log(dioryData)
+
     // 4. Create diory and return it
     return this.createDiory(dioryData).then(diory => {
       return diory
     })
   }
 
-  static toDecimal(number) {
+  static toGpsDecimal(number) {
     return number[0].numerator + number[1].numerator /
       (60 * number[1].denominator) + number[2].numerator / (3600 * number[2].denominator);
   };
