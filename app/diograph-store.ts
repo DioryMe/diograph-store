@@ -172,9 +172,8 @@ export class DiographStore {
     console.log(file);
 
     // 1. Background is the uploaded image's S3 url
-    let background =
-      // Get uploadUrl from diory-server
-      await DiographApi.getUploadUrls().then((uploadUrls) => {
+    // Get uploadUrl from diory-server
+    let background = await DiographApi.getUploadUrls().then((uploadUrls) => {
         console.log(uploadUrls["upload-url"])
         // Upload the file to S3 via PUT request to uploadUrl
         return request.put(uploadUrls["upload-url"]).send(file).then((response) => {
@@ -207,14 +206,16 @@ export class DiographStore {
   }
 
   static async extractEXIFData(file) {
-    let exif = {}
-    return EXIF.getData(file, function() {
-      exif["date"] = this.toGpsDecimal(EXIF.getTag(this, "DateTimeOriginal"));
-      exif["latitude"] = this.toGpsDecimal(EXIF.getTag(this, "GPSLatitude"));
-      exif["longitude"] = this.toGpsDecimal(EXIF.getTag(this, "GPSLongitude"));
-      return exif
-    });
-
+    let self = this
+    return new Promise((resolve) => {
+      let exif = {}
+      EXIF.getData(file, function() {
+        exif["date"] = EXIF.getTag(file, "DateTimeOriginal");
+        exif["latitude"] = self.toGpsDecimal(EXIF.getTag(file, "GPSLatitude"));
+        exif["longitude"] = self.toGpsDecimal(EXIF.getTag(file, "GPSLongitude"));
+        resolve(exif)
+      });
+    })
   }
 
   static toGpsDecimal(number) {
