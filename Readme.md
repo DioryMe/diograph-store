@@ -50,6 +50,10 @@ Compiled Javascript is placed into `lib/`.
 
 ## Tests
 
+You need a diory-server running on localhost:3000 in order to run the test suite.
+
+Diory server should be started with `bundle exec puma -t 1:1` in order to avoid error "SQLite3::BusyException: database is locked"
+
 ```
 npm test
 ```

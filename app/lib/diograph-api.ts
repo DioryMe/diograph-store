@@ -62,6 +62,12 @@ export class DiographApi {
     return this.deleteToEndpoint(endpoint)
   }
 
+  static getUploadUrls() {
+    return this.getFromEndpoint("http://localhost:3000/v1/presigned-upload-url").then((response) => {
+      return response.data
+    })
+  }
+
   private static getFromEndpoint(endpoint, query={}) {
     var promise = request
       .get(endpoint)
