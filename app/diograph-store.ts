@@ -169,23 +169,19 @@ export class DiographStore {
 
   static async createDioryFromImageFile(event): Promise<Diory> {
     var file = event.target.files[0];
-    console.log(file);
 
     // 1. Background is the uploaded image's S3 url
     // Get uploadUrl from diory-server
     let background = await DiographApi.getUploadUrls().then((uploadUrls) => {
-        console.log(uploadUrls["upload-url"])
         // Upload the file to S3 via PUT request to uploadUrl
         return request.put(uploadUrls["upload-url"]).send(file).then((response) => {
           // Return S3 url
-          console.log(uploadUrls["public-url"])
-          return uploadUrls["public-urls"]
+          return uploadUrls["public-url"]
         })
       })
 
     // 2. Date, latitude & longitude are extracted from EXIF
     let exif = await this.extractEXIFData(file)
-    console.log(exif)
 
     // 3. Diory attributes are composed to dioryData
     let dioryData = {
@@ -196,8 +192,6 @@ export class DiographStore {
       latitude: exif["latitude"],
       longitude: exif["longitude"]
     }
-
-    console.log(dioryData)
 
     // 4. Create diory and return it
     return this.createDiory(dioryData).then(diory => {
