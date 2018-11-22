@@ -1,15 +1,26 @@
+var webpack = require('webpack');
+
 module.exports = {
-    entry: "./app/index.ts",
-    output: {
-        filename: "./dist/bundle.js",
-        path: __dirname,
-    },
-    module: {
-        loaders: [
-            { test: /\.tsx?$/, loader: "ts-loader" }
-        ]
-    },
-    resolve: {
-        extensions: ['.ts', '.tsx', '.js']
-    }
+  mode: "development",
+  entry: "./app/diograph-store.ts",
+  output: {
+    filename: "./dist/bundle.js",
+    path: __dirname,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: [ { loader: "ts-loader" } ]
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
+  },
+  plugins: [
+    new webpack.EnvironmentPlugin({
+      'DIOGRAPH_SERVER_HOST': 'http://localhost:3000'
+    })
+  ]
 };
