@@ -2,25 +2,27 @@
   "name": "diograph-store",
   "version": "0.1.1",
   "description": "",
-  "main": "lib/diograph-store.js",
+  "main": "dist/diograph-store.js",
+  "files": [
+    "dist/diograph-store.js",
+    "dist/lib/*",
+    "dist/models/*"
+  ],
   "scripts": {
-    "compile": "rm -r ./lib; npx tsc",
+    "compile": "rm -r ./dist; npx tsc",
     "test": "rm -r ./dist; npx tsc -p tsconfig.test.json; npx jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "ts-loader": "*",
-    "typescript": "*",
-    "webpack": "*",
-    "webpack-cli": "*",
-    "jasmine": "*",
-    "@types/jasmine": "*",
-    "@types/node": "*",
-    "selenium-webdriver": "*"
+    "ts-loader": "5.3.0",
+    "typescript": "3.1.6",
+    "jasmine": "3.3.0",
+    "@types/jasmine": "3.3.0",
+    "@types/node": "10.12.10"
   },
   "dependencies": {
     "jsonapi-datastore": "^0.4.0-beta",
-    "superagent": "^3.5.2"
+    "superagent": "3.8.2"
   }
 }
