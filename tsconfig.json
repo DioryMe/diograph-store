@@ -1,13 +1,13 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
-        "sourceMap": false,
-        "allowJs": false,
-        "outDir": "lib"
-    },
-    "include": [
-      "app/diograph-store.ts",
-      "app/*/*.ts"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": false,
+    "allowJs": false,
+    "outDir": "dist"
+  },
+  "include": [
+    "app/diograph-store.ts",
+    "app/*/*.ts"
+  ]
 }
