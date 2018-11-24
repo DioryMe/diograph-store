@@ -6,7 +6,7 @@ describe("DiographStore .deleteDiory()", () => {
   let diory
 
   beforeEach((done) => {
-    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
+    DiographApi.authToken = "testtoken"
     let dioryObj = { name: "Created diory" }
     DiographStore.createDiory(dioryObj).then((createdDiory) => {
       diory = createdDiory

@@ -6,7 +6,7 @@ describe("Diograph API .delete('connection')", () => {
   let connectionId
 
   beforeAll((done) => {
-    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
+    DiographApi.authToken = "testtoken"
     DiographStore.getAllDiories().then(diories => {
       let diory1 = diories[0]
       let diory2 = diories[1]

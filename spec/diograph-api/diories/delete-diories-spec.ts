@@ -5,7 +5,7 @@ describe("Diograph API .delete()", () => {
    var dioryId;
 
   beforeEach((done) => {
-    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
+    DiographApi.authToken = "testtoken"
     DiographApi.create({"name": "Diory to be deleted"}).then((res) => {
       dioryId = res.data.id
       done()

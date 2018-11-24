@@ -7,7 +7,7 @@ describe("DiographStore .createAndConnectDioryStrongly()", () => {
   let diory1
 
   beforeEach((done) => {
-    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
+    DiographApi.authToken = "testtoken"
     DiographStore.createDiory({"name": "Diory to be strongly connected from"}).then(diory => {
       diory1 = diory
       done()

@@ -4,7 +4,7 @@ import * as ErrorHandler from "../../../app/lib/error-handler"
 describe("Diograph API .create('diories')", () => {
 
   beforeEach(() => {
-    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
+    DiographApi.authToken = "testtoken"
   })
 
   it("creates a 'New diory'", (done) => {

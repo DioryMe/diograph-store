@@ -7,7 +7,7 @@ export let placeFixture = {
     },
     "attributes": {
       "diory-id": "e68ed69d-c4a4-4323-82d7-fa9618224043",
-      "room-id": "df548369-d0a2-4ca5-b28a-dd4fb14c1f08",
+      "room-id": "testtoken",
       "version": "0.1.9",
       "diory-type": "place",
       "name": "Mämmisuo",
@@ -144,7 +144,7 @@ export let placeFixture = {
       },
       "attributes": {
         "diory-id": "acf10675-2b48-4e5e-9f18-82fb7e937fa4",
-        "room-id": "df548369-d0a2-4ca5-b28a-dd4fb14c1f08",
+        "room-id": "testtoken",
         "version": "0.1.9",
         "diory-type": "check-in",
         "name": "Mämmisuo - 30.9.2017 - 14:11",
@@ -192,7 +192,7 @@ export let placeFixture = {
       },
       "attributes": {
         "diory-id": "bee6c1f8-a68c-4ee5-bba9-27444c635576",
-        "room-id": "df548369-d0a2-4ca5-b28a-dd4fb14c1f08",
+        "room-id": "testtoken",
         "version": "0.1.9",
         "diory-type": "check-in",
         "name": "Mämmisuo - 30.8.2017 - 12:11",

@@ -7,7 +7,7 @@ describe("DiographStore .createAndConnectDiory()", () => {
   let diory1
 
   beforeAll((done) => {
-    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
+    DiographApi.authToken = "testtoken"
     DiographStore.getAllDiories().then(diories => {
       diory1 = diories[0]
       done()

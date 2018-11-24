@@ -4,7 +4,7 @@ import * as ErrorHandler from "../../../app/lib/error-handler"
 describe("Diograph API .get('diories')", () => {
 
   beforeEach(() => {
-    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
+    DiographApi.authToken = "testtoken"
   })
 
   it("returns a diory if type is diories", (done) => {

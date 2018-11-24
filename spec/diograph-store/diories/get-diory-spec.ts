@@ -4,7 +4,7 @@ import { Diory } from "../../../app/models/diory"
 describe("DiographStore .get('diories')", () => {
 
   beforeEach(() => {
-    DiographStore.setAuthToken("df548369-d0a2-4ca5-b28a-dd4fb14c1f08")
+    DiographStore.setAuthToken("testtoken")
   })
 
   it("returns Diory when success", (done) => {

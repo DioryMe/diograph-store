@@ -10,7 +10,7 @@ describe("DiographStore .deleteConnection()", () => {
   let fromDiory, toDiory, connection
 
   beforeEach(done => {
-    DiographApi.authToken = "df548369-d0a2-4ca5-b28a-dd4fb14c1f08"
+    DiographApi.authToken = "testtoken"
     let fromDioryObj = { name: "FromDiory" }
     let toDioryObj = { name: "ToDiory" }
     DiographStore.createDiory(fromDioryObj).then((diory) => {

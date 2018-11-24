@@ -5,7 +5,7 @@ import { Connection } from "../../../app/models/connection"
 describe("DiographStore .get('connections')", () => {
 
   beforeEach(() => {
-    DiographStore.setAuthToken("df548369-d0a2-4ca5-b28a-dd4fb14c1f08")
+    DiographStore.setAuthToken("testtoken")
   })
 
   it("returns Connection when success", (done) => {
