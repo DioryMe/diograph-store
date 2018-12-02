@@ -9,8 +9,9 @@
     "dist/models/*"
   ],
   "scripts": {
+    "test": "rm -r ./dist; npx tsc -p tsconfig.test.json; npx jasmine JASMINE_CONFIG_PATH=jasmine.json",
     "compile": "rm -r ./dist; npx tsc",
-    "test": "rm -r ./dist; npx tsc -p tsconfig.test.json; npx jasmine JASMINE_CONFIG_PATH=jasmine.json"
+    "prepublish": "npm run compile"
   },
   "author": "",
   "license": "ISC",
