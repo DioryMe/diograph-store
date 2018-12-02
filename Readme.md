@@ -3,7 +3,7 @@
 ## Usage
 
 ```
-npm install diograph-store
+npm install diograph-store --save-dev
 ```
 
 ```typescript
@@ -46,16 +46,12 @@ npm run compile
 ```
 
 Compiles Typescript into Javascript starting from `app/index.ts`.
-Compiled Javascript is placed into `lib/`.
+Compiled Javascript is placed into `dist/`.
 
 ## Tests
 
+Currently tests have to be run against a running diograph server. Give host url as DIOGRAPH_SERVER_HOST env when running tests.
+
 ```
-npm test
+DIOGRAPH_SERVER_HOST=http://localhost:3000 npm test
 ```
-
-Jasmine tests are placed in `spec/` folder.
-With `npm test` Typescript is compiled to Javascript and tests run with `jasmine`:
-
-
-
