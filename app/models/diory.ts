@@ -7,7 +7,7 @@ export class Diory {
   public type: string;
   public background: string;
   public date: string;
-  public geo: string;
+  public geo: any;
   public connectedDiories = [];
 
   constructor(data, addConnectedDiories=true) {
@@ -21,7 +21,7 @@ export class Diory {
     this.type = data["diory-type"];
     this.background = data.background;
     this.date = data.date;
-    this.geo = data.geo;
+    this.geo = data.geo || {};
     if (data["connected-diories"] && addConnectedDiories) {
       this.addConnectedDiories(data)
     }

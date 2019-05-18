@@ -9,6 +9,12 @@ describe("Diory spec", () => {
     expect(diory.name).toEqual("New diory")
   })
 
+  it("doesnt crash when geo attributes not defined", () => {
+    let diory = new Diory({ "name": "New diory"})
+    expect(diory.name).toEqual("New diory")
+    expect(diory.geo.latitude).toEqual(undefined)
+  })
+
   describe("from fixture", () => {
     let diory, datastore, placeFixtureDatastore
 
@@ -35,7 +41,5 @@ describe("Diory spec", () => {
     it("has undefined if value is null", () => {
       expect(diory.date).toEqual(undefined)
     })
-
   })
-
 })
