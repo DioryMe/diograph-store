@@ -22,20 +22,12 @@ export class Diory {
     if (data.address && data.address.indexOf('http') != 0) {
       url = process.env.DIOGRAPH_SERVER_HOST + '/dataobjects/' + data.address
     }
-    // Convert Dropbox public url to /dataobjects url
-    if (data.address && data.address.indexOf('https://dl.dropboxusercontent.com/u/11140007/media/') == 0) {
-      url = data.address.replace('https://dl.dropboxusercontent.com/u/11140007/media/', process.env.DIOGRAPH_SERVER_HOST + '/static/')
-    }
 
     // BACKGROUND
     let background = data.background
     // Convert UUID in background field to /dataobjects url
     if (data.background && data.background.indexOf('http') != 0) {
       background = process.env.DIOGRAPH_SERVER_HOST + '/dataobjects/' + data.background
-    }
-    // Convert Dropbox public url to /dataobjects url
-    if (data.background && data.background.indexOf('https://dl.dropboxusercontent.com/u/11140007/media/') == 0) {
-      background = data.background.replace('https://dl.dropboxusercontent.com/u/11140007/media/', process.env.DIOGRAPH_SERVER_HOST + '/static/')
     }
 
     this.id = data.id;
