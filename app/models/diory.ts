@@ -24,7 +24,7 @@ export class Diory {
     }
     // Convert Dropbox public url to /dataobjects url
     if (data.address && data.address.indexOf('https://dl.dropboxusercontent.com/u/11140007/media/') == 0) {
-      url = data.address.replace('https://dl.dropboxusercontent.com/u/11140007/media/', 'http://localhost/static/')
+      url = data.address.replace('https://dl.dropboxusercontent.com/u/11140007/media/', process.env.DIOGRAPH_SERVER_HOST + '/static/')
     }
 
     // BACKGROUND
@@ -35,7 +35,7 @@ export class Diory {
     }
     // Convert Dropbox public url to /dataobjects url
     if (data.background && data.background.indexOf('https://dl.dropboxusercontent.com/u/11140007/media/') == 0) {
-      background = data.background.replace('https://dl.dropboxusercontent.com/u/11140007/media/', 'http://localhost/static/')
+      background = data.background.replace('https://dl.dropboxusercontent.com/u/11140007/media/', process.env.DIOGRAPH_SERVER_HOST + '/static/')
     }
 
     this.id = data.id;
