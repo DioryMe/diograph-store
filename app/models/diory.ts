@@ -19,15 +19,15 @@ export class Diory {
     // ADDRESS
     let url = data.address
     // Convert UUID in address field to /dataobjects url
-    if (data.address && data.address.indexOf('http') != 0) {
-      url = process.env.DIOGRAPH_SERVER_HOST + '/v1/dataobjects/' + data.address
+    if (data.address && data.address.indexOf('dataobject://') == 0) {
+      url = process.env.DIOGRAPH_SERVER_HOST + '/v1/dataobjects/' + data.address.replace('dataobject://', '')
     }
 
     // BACKGROUND
     let background = data.background
     // Convert UUID in background field to /dataobjects url
-    if (data.background && data.background.indexOf('http') != 0) {
-      background = process.env.DIOGRAPH_SERVER_HOST + '/v1/dataobjects/' + data.background
+    if (data.background && data.background.indexOf('dataobject://') == 0) {
+      background = process.env.DIOGRAPH_SERVER_HOST + '/v1/dataobjects/' + data.background.replace('dataobject://', '')
     }
 
     this.id = data.id;
